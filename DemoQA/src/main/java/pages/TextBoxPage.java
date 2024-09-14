@@ -18,6 +18,8 @@ public class TextBoxPage extends Pages {
 	public By lblEmailOutput = By.xpath("//div[@id='output']//p[@id='email']");
 	public By lblCurrentAddOutput = By.xpath("//div[@id='output']//p[@id='currentAddress']");
 	public By lblPermanetAddOutput = By.xpath("//div[@id='output']//p[@id='permanentAddress']");
+	
+	public By levelOutput = By.xpath("//div[@id='output']");
 
 	public TextBoxPage(WebDriver BaseDr) {
 		super(BaseDr);
@@ -44,6 +46,13 @@ public class TextBoxPage extends Pages {
 		String result = outputText.substring(indexColon + 1);
 
 		return result;
+	}
+	
+	public String getBorderColor(By locator) {
+		WebElement control = dr.findElement(locator);
+		String outputColorCode = control.getCssValue("border");
+		
+		return outputColorCode;
 	}
 
 }

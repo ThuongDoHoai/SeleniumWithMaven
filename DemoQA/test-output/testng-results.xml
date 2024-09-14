@@ -2,16 +2,16 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-09-14T01:41:14 ICT" name="Default suite" finished-at="2024-09-14T01:41:32 ICT" duration-ms="17856">
+  <suite started-at="2024-09-15T02:32:24 ICT" name="Default suite" finished-at="2024-09-15T02:33:12 ICT" duration-ms="47680">
     <groups>
     </groups>
-    <test started-at="2024-09-14T01:41:14 ICT" name="Default test" finished-at="2024-09-14T01:41:32 ICT" duration-ms="17856">
+    <test started-at="2024-09-15T02:32:24 ICT" name="Default test" finished-at="2024-09-15T02:33:12 ICT" duration-ms="47680">
       <class name="tests.TextBoxTest">
-        <test-method is-config="true" signature="openPage()[pri:0, instance:tests.TextBoxTest@79924b]" started-at="2024-09-14T01:41:14 ICT" name="openPage" finished-at="2024-09-14T01:41:30 ICT" duration-ms="15777" status="PASS">
+        <test-method is-config="true" signature="openTextBoxPage()[pri:0, instance:tests.TextBoxTest@4cc451f2]" started-at="2024-09-15T02:32:24 ICT" name="openTextBoxPage" finished-at="2024-09-15T02:32:44 ICT" duration-ms="19702" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- openPage -->
-        <test-method signature="submitSuccessfully()[pri:0, instance:tests.TextBoxTest@79924b]" started-at="2024-09-14T01:41:30 ICT" name="submitSuccessfully" finished-at="2024-09-14T01:41:32 ICT" duration-ms="1968" status="PASS">
+        </test-method> <!-- openTextBoxPage -->
+        <test-method signature="submitSuccessfully()[pri:0, instance:tests.TextBoxTest@4cc451f2]" started-at="2024-09-15T02:32:44 ICT" name="submitSuccessfully" finished-at="2024-09-15T02:33:12 ICT" duration-ms="27888" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- submitSuccessfully -->

@@ -14,7 +14,7 @@ import pages.TextBoxPage;
 
 public class TextBoxTest extends StandardTest {
 
-	 @Test
+	@Test
 	public void submitSuccessfully() throws InterruptedException {
 		String inputFullName = "Do Hoai Thuong";
 		String inputEmail = "dohoaithuong1989@gmail.com";
@@ -59,7 +59,7 @@ public class TextBoxTest extends StandardTest {
 
 	}
 
-	//@Test(groups = "validation")
+	@Test(groups = "validation")
 	public void emailFormatWithoutAtSign() throws InterruptedException {
 
 		String inputFullName = "Do Hoai Thuong";

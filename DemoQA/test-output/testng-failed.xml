@@ -5,6 +5,7 @@
     <classes>
       <class name="tests.TextBoxTest">
         <methods>
+          <include name="openPage"/>
           <include name="submitSuccessfully"/>
         </methods>
       </class> <!-- tests.TextBoxTest -->

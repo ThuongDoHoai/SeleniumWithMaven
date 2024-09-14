@@ -9,9 +9,9 @@ public class TestBase {
 			
 	public void openPage() throws InterruptedException {	
 		String projectPath = System.getProperty("user.dir");
-		System.setProperty("webdriver.chrome.driver", projectPath + "\\drivers\\chromedriver.exe"); //sai dau, phai chu y la \\
+		System.setProperty("webdriver.chrome.driver", projectPath + "\\drivers\\chromedriver.exe"); 
 		
-		driver = new ChromeDriver(); //thieu khoi tao bien
+		driver = new ChromeDriver(); 
 		
 		driver.get("https://demoqa.com/");
 		

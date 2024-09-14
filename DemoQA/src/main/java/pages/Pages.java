@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 public class Pages {
 	
-	public WebDriver dr; //thieu define access method
+	public WebDriver dr; 
 
 	public Pages(WebDriver baseDr) {
 		this.dr = baseDr;

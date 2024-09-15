@@ -6,8 +6,8 @@ public class Pages {
 	
 	public WebDriver dr; 
 
-	public Pages(WebDriver baseDr) {
-		this.dr = baseDr;
+	public Pages(WebDriver driverWeb) {
+		this.dr = driverWeb;
 	}
 	
 

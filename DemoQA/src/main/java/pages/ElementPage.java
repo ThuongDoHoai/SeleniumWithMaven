@@ -6,8 +6,8 @@ import org.openqa.selenium.WebElement;
 
 public class ElementPage extends Pages {
 
-	public ElementPage(WebDriver baseDr) {
-		super(baseDr);
+	public ElementPage(WebDriver driverWeb) {
+		super(driverWeb);
 	}
 
 	public TextBoxPage clickTextBox() {

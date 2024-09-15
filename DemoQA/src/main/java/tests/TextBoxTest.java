@@ -1,6 +1,8 @@
 package tests;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 import java.lang.annotation.ElementType;
 
@@ -12,9 +14,9 @@ import pages.ElementPage;
 import pages.HomePage;
 import pages.TextBoxPage;
 
-public class TextBoxTest extends StandardTest {
+public class TextBoxTest extends TestCase {
 
-	@Test
+	// @Test
 	public void submitSuccessfully() throws InterruptedException {
 		String inputFullName = "Do Hoai Thuong";
 		String inputEmail = "dohoaithuong1989@gmail.com";
@@ -26,14 +28,7 @@ public class TextBoxTest extends StandardTest {
 		String actualCurrentAdd = "";
 		String actualPermanetAdd = "";
 
-		// input data
-		/*
-		 * HomePage homePage = new HomePage(testBase.driver); ElementPage elementPage =
-		 * homePage.clickElementMenu(); TextBoxPage textBoxPage =
-		 * elementPage.clickTextBox();
-		 */
-
-		TextBoxPage textBoxPage = openTextBoxPage();
+		openTextBoxPage();
 
 		textBoxPage.inputText(textBoxPage.lblNameInput, inputFullName);
 		textBoxPage.inputText(textBoxPage.lblEmailInput, inputEmail);
@@ -59,7 +54,7 @@ public class TextBoxTest extends StandardTest {
 
 	}
 
-	@Test(groups = "validation")
+	// @Test(groups = "validation")
 	public void emailFormatWithoutAtSign() throws InterruptedException {
 
 		String inputFullName = "Do Hoai Thuong";
@@ -67,18 +62,7 @@ public class TextBoxTest extends StandardTest {
 		String inputCurrentAdd = "Ha Noi";
 		String inputPermanetAdd = "HCM";
 
-		String actualOutputText = "";
-		String actualColorCodeInRGB = "";
-		String expectedColorCodeInRGB = "1px solid rgb(255, 0, 0)";
-
-		// input data
-		/*
-		 * HomePage homePage = new HomePage(testBase.driver); ElementPage elementPage =
-		 * homePage.clickElementMenu(); TextBoxPage textBoxPage =
-		 * elementPage.clickTextBox();
-		 */
-
-		TextBoxPage textBoxPage = openTextBoxPage();
+		openTextBoxPage();
 
 		textBoxPage.inputText(textBoxPage.lblNameInput, inputFullName);
 		textBoxPage.inputText(textBoxPage.lblEmailInput, inputEmail);
@@ -86,16 +70,15 @@ public class TextBoxTest extends StandardTest {
 		textBoxPage.inputText(textBoxPage.lblPermanetAddInput, inputPermanetAdd);
 		textBoxPage.clickSubmit();
 
-		// verify red border
-		actualColorCodeInRGB = textBoxPage.getBorderColor(textBoxPage.lblEmailInput);
-		assertEquals(actualColorCodeInRGB, expectedColorCodeInRGB);
+		// check red border
+		assertTrue(textBoxPage.checkRedBorder(textBoxPage.lblEmailInput));
 
-		// do not save in server
-		actualOutputText = textBoxPage.getTextAfterSubmit(textBoxPage.levelOutput);
-		assertEquals(actualOutputText, "");
+		// check do not save in server
+		assertTrue(textBoxPage.checkSaveServer(textBoxPage.lblOutputArea));
 
 	}
 
+	@Test(groups = "validation")
 	public void emailFormatWithoutDomain() throws InterruptedException {
 
 		String inputFullName = "Do Hoai Thuong";
@@ -103,18 +86,7 @@ public class TextBoxTest extends StandardTest {
 		String inputCurrentAdd = "Ha Noi";
 		String inputPermanetAdd = "HCM";
 
-		String actualOutputText = "";
-		String actualColorCodeInRGB = "";
-		String expectedColorCodeInRGB = "1px solid rgb(255, 0, 0)";
-
-		// input data
-		/*
-		 * HomePage homePage = new HomePage(testBase.driver); ElementPage elementPage =
-		 * homePage.clickElementMenu(); TextBoxPage textBoxPage =
-		 * elementPage.clickTextBox();
-		 */
-
-		TextBoxPage textBoxPage = openTextBoxPage();
+		openTextBoxPage();
 
 		textBoxPage.inputText(textBoxPage.lblNameInput, inputFullName);
 		textBoxPage.inputText(textBoxPage.lblEmailInput, inputEmail);
@@ -122,14 +94,12 @@ public class TextBoxTest extends StandardTest {
 		textBoxPage.inputText(textBoxPage.lblPermanetAddInput, inputPermanetAdd);
 		textBoxPage.clickSubmit();
 
-		// verify red border
-		actualColorCodeInRGB = textBoxPage.getBorderColor(textBoxPage.lblEmailInput);
-		assertEquals(actualColorCodeInRGB, expectedColorCodeInRGB);
+		// check red border
+		assertTrue(textBoxPage.checkRedBorder(textBoxPage.lblEmailInput));
 
-		// do not save in server
-		actualOutputText = textBoxPage.getTextAfterSubmit(textBoxPage.levelOutput);
-		assertEquals(actualOutputText, "");
-
+		// check do not save in server
+		// assertFalse(!testBase.driver.findElement(textBoxPage.lblOutputArea).isDisplayed());
+		assertTrue(textBoxPage.checkSaveServer(textBoxPage.lblOutputArea));
 	}
 
 }

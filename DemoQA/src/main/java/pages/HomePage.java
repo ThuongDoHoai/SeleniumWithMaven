@@ -7,8 +7,8 @@ import org.openqa.selenium.WebElement;
 
 public class HomePage extends Pages {
 
-	public HomePage(WebDriver baseDr) {
-		super(baseDr);
+	public HomePage(WebDriver driverWeb) {
+		super(driverWeb);
 	}
 
 	public ElementPage clickElementMenu() {

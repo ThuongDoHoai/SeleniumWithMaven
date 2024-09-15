@@ -19,10 +19,11 @@ public class TextBoxPage extends Pages {
 	public By lblCurrentAddOutput = By.xpath("//div[@id='output']//p[@id='currentAddress']");
 	public By lblPermanetAddOutput = By.xpath("//div[@id='output']//p[@id='permanentAddress']");
 	
-	public By levelOutput = By.xpath("//div[@id='output']");
+	public By lblOutputArea = By.xpath("//div[@id='output']/div");
 
-	public TextBoxPage(WebDriver BaseDr) {
-		super(BaseDr);
+	//constructor
+	public TextBoxPage(WebDriver driverWeb) {
+		super(driverWeb);
 	}
 
 	public void inputText(By locator, String inputValue) {
@@ -48,11 +49,26 @@ public class TextBoxPage extends Pages {
 		return result;
 	}
 	
-	public String getBorderColor(By locator) {
+	
+	public boolean checkRedBorder(By locator) {
 		WebElement control = dr.findElement(locator);
-		String outputColorCode = control.getCssValue("border");
+		String checkError = control.getAttribute("class");
 		
-		return outputColorCode;
+		if(checkError.contains("field-error")) {
+			return true;
+		}
+		return false;
+		
+	}
+	
+	public boolean checkSaveServer(By locator) {
+		WebElement control = dr.findElement(locator);
+		String checkError = control.getAttribute("class");
+		
+		if(checkError.contains("undefined")) {
+			return true;
+		}
+		return false;
 	}
 
 }

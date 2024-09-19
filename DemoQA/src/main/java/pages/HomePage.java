@@ -13,14 +13,14 @@ public class HomePage extends Pages {
 
 	public ElementPage clickElementMenu() {
 
-		WebElement elementMenu = dr.findElement(By.xpath("//h5[text()='Elements']"));
+		WebElement elementMenu = drPage.findElement(By.xpath("//h5[text()='Elements']"));
 
-		JavascriptExecutor js = (JavascriptExecutor) dr;
+		JavascriptExecutor js = (JavascriptExecutor) drPage;
 
 		js.executeScript("arguments[0].scrollIntoView(true);", elementMenu);
 
 		elementMenu.click();
-		return new ElementPage(dr);
+		return new ElementPage(drPage);
 	}
 
 }

@@ -1,34 +1,38 @@
 package tests;
 
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 
 import commons.TestBase;
-import pages.ElementPage;
-import pages.HomePage;
+import pages.CheckBoxPage;
 import pages.TextBoxPage;
 
 public class TestCase {
 
-	TestBase testBase = new TestBase();
-	TextBoxPage textBoxPage;
+	public TestBase drTest = new TestBase();
+	public TextBoxPage textBoxPage;
+	public CheckBoxPage checkBoxPage;
 
-	@BeforeTest
+	@BeforeClass
 	public void openPage() throws InterruptedException {
-		testBase.openPage();
+		drTest.openPage();
 	}
 
-	public TextBoxPage openTextBoxPage() {
-		testBase.driver.navigate().to("https://demoqa.com/text-box");
-		textBoxPage = new TextBoxPage(testBase.driver);
+	public TextBoxPage openTexBoxPage() throws InterruptedException {
+		drTest.driver.navigate().to("https://demoqa.com/text-box");
+		textBoxPage = new TextBoxPage(drTest.driver);
 		return textBoxPage;
 	}
 
-	// @AfterTest
+	public CheckBoxPage openCheckBoxPage() {
+		drTest.driver.navigate().to("https://demoqa.com/checkbox");
+		checkBoxPage = new CheckBoxPage(drTest.driver);
+		return checkBoxPage;
+	}
+
+	// @AfterClass
 	public void tearDown() {
-		testBase.driver.quit();
+		drTest.driver.quit();
 	}
 
 }

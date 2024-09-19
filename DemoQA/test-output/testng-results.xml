@@ -2,23 +2,20 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-09-16T00:48:06 ICT" name="Default suite" finished-at="2024-09-16T00:48:53 ICT" duration-ms="46959">
+  <suite started-at="2024-09-19T21:25:29 ICT" name="Default suite" finished-at="2024-09-19T21:26:29 ICT" duration-ms="59118">
     <groups>
-      <group name="validation">
-        <method signature="TextBoxTest.emailFormatWithoutDomain()[pri:0, instance:tests.TextBoxTest@4cc451f2]" name="emailFormatWithoutDomain" class="tests.TextBoxTest"/>
-      </group> <!-- validation -->
     </groups>
-    <test started-at="2024-09-16T00:48:06 ICT" name="Default test" finished-at="2024-09-16T00:48:53 ICT" duration-ms="46959">
-      <class name="tests.TextBoxTest">
-        <test-method is-config="true" signature="openPage()[pri:0, instance:tests.TextBoxTest@4cc451f2]" started-at="2024-09-16T00:48:06 ICT" name="openPage" finished-at="2024-09-16T00:48:18 ICT" duration-ms="12355" status="PASS">
+    <test started-at="2024-09-19T21:25:29 ICT" name="Default test" finished-at="2024-09-19T21:26:29 ICT" duration-ms="59118">
+      <class name="tests.CheckBoxTest">
+        <test-method is-config="true" signature="openPage()[pri:0, instance:tests.CheckBoxTest@6379eb]" started-at="2024-09-19T21:25:29 ICT" name="openPage" finished-at="2024-09-19T21:25:50 ICT" duration-ms="20319" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openPage -->
-        <test-method signature="emailFormatWithoutDomain()[pri:0, instance:tests.TextBoxTest@4cc451f2]" started-at="2024-09-16T00:48:18 ICT" name="emailFormatWithoutDomain" finished-at="2024-09-16T00:48:53 ICT" duration-ms="34500" status="PASS">
+        <test-method signature="checkSubCheckBox()[pri:0, instance:tests.CheckBoxTest@6379eb]" started-at="2024-09-19T21:25:50 ICT" name="checkSubCheckBox" finished-at="2024-09-19T21:26:29 ICT" duration-ms="38714" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- emailFormatWithoutDomain -->
-      </class> <!-- tests.TextBoxTest -->
+        </test-method> <!-- checkSubCheckBox -->
+      </class> <!-- tests.CheckBoxTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

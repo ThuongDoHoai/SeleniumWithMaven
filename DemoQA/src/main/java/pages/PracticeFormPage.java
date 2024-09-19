@@ -9,8 +9,8 @@ import commons.TestBase;
 
 public class PracticeFormPage extends Pages {
 
-	public PracticeFormPage(WebDriver driverWeb) {
-		super(driverWeb);
+	public PracticeFormPage(WebDriver driver) {
+		super(driver);
 	}
 	
 	public void inputData() {
@@ -18,8 +18,8 @@ public class PracticeFormPage extends Pages {
 	}
 	
 	public void inputDate() {
-		dr.findElement(By.id("//input[@id='dateOfBirthInput']")).click();
-		WebElement drYear = dr.findElement(By.xpath("//select[@class='react-datepicker__year-select']"));
+		drPage.findElement(By.id("//input[@id='dateOfBirthInput']")).click();
+		WebElement drYear = drPage.findElement(By.xpath("//select[@class='react-datepicker__year-select']"));
 		
 		Select selectYear = new Select(drYear);
 		selectYear.selectByVisibleText("");

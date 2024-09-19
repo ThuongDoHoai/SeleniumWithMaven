@@ -4,10 +4,10 @@ import org.openqa.selenium.WebDriver;
 
 public class Pages {
 	
-	public WebDriver dr; 
+	public WebDriver drPage; 
 
 	public Pages(WebDriver driverWeb) {
-		this.dr = driverWeb;
+		this.drPage = driverWeb;
 	}
 	
 

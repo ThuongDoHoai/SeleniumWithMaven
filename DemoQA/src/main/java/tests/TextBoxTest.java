@@ -1,12 +1,12 @@
 package tests;
 
+import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 import java.lang.annotation.ElementType;
 
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import commons.TestBase;
@@ -16,90 +16,73 @@ import pages.TextBoxPage;
 
 public class TextBoxTest extends TestCase {
 
-	// @Test
+	//@Test
 	public void submitSuccessfully() throws InterruptedException {
+
 		String inputFullName = "Do Hoai Thuong";
-		String inputEmail = "dohoaithuong1989@gmail.com";
-		String inputCurrentAdd = "Ha Noi";
-		String inputPermanetAdd = "HCM";
+		String inputEmail = "abc@gmail.com";
+		String inputCurrentAdd = "HN";
+		String inputPermenantAdd = "HCM";
 
-		String actualFullName = "";
-		String actualEmail = "";
-		String actualCurrentAdd = "";
-		String actualPermanetAdd = "";
+		String actualOuput = "";
 
-		openTextBoxPage();
+		openTexBoxPage();
 
-		textBoxPage.inputText(textBoxPage.lblNameInput, inputFullName);
-		textBoxPage.inputText(textBoxPage.lblEmailInput, inputEmail);
-		textBoxPage.inputText(textBoxPage.lblCurrentAddInput, inputCurrentAdd);
-		textBoxPage.inputText(textBoxPage.lblPermanetAddInput, inputPermanetAdd);
+		textBoxPage.inputData(textBoxPage.lblInputFullName, inputFullName);
+		textBoxPage.inputData(textBoxPage.lblInputEmail, inputEmail);
+		textBoxPage.inputData(textBoxPage.lblInputCurrentAdd, inputCurrentAdd);
+		textBoxPage.inputData(textBoxPage.lblInputPermanentAdd, inputPermenantAdd);
 		textBoxPage.clickSubmit();
 
-		// assert Name field
-		actualFullName = textBoxPage.getTextAfterSubmit(textBoxPage.lblNameOutput);
-		assertEquals(actualFullName, inputFullName);
+		actualOuput = textBoxPage.getTextAfterSubmit(textBoxPage.lblOuputFullName);
+		assertEquals(actualOuput, inputFullName);
 
-		// assert Email field
-		actualEmail = textBoxPage.getTextAfterSubmit(textBoxPage.lblEmailOutput);
-		assertEquals(actualEmail, inputEmail);
+		actualOuput = textBoxPage.getTextAfterSubmit(textBoxPage.lblOutputEmail);
+		assertEquals(actualOuput, inputEmail);
 
-		// assert Current Add field
-		actualCurrentAdd = textBoxPage.getTextAfterSubmit(textBoxPage.lblCurrentAddOutput);
-		assertEquals(actualCurrentAdd, inputCurrentAdd);
+		actualOuput = textBoxPage.getTextAfterSubmit(textBoxPage.lblOutputCurrentAdd);
+		assertEquals(actualOuput, inputCurrentAdd);
 
-		// assert Permanet Add field
-		actualPermanetAdd = textBoxPage.getTextAfterSubmit(textBoxPage.lblPermanetAddOutput);
-		assertEquals(actualPermanetAdd, inputPermanetAdd);
+		actualOuput = textBoxPage.getTextAfterSubmit(textBoxPage.lblOutputPermanentAdd);
+		assertEquals(actualOuput, inputPermenantAdd);
 
 	}
 
-	// @Test(groups = "validation")
-	public void emailFormatWithoutAtSign() throws InterruptedException {
-
+	@Test(groups = "validation case: without @ in email")
+	public void submiInvalidEmail_1() throws InterruptedException {
 		String inputFullName = "Do Hoai Thuong";
-		String inputEmail = "dohoaithuong1989gmail.com";
-		String inputCurrentAdd = "Ha Noi";
-		String inputPermanetAdd = "HCM";
+		String inputEmail = "abcgmail.com";
+		String inputCurrentAdd = "HN";
+		String inputPermenantAdd = "HCM";
 
-		openTextBoxPage();
+		openTexBoxPage();
 
-		textBoxPage.inputText(textBoxPage.lblNameInput, inputFullName);
-		textBoxPage.inputText(textBoxPage.lblEmailInput, inputEmail);
-		textBoxPage.inputText(textBoxPage.lblCurrentAddInput, inputCurrentAdd);
-		textBoxPage.inputText(textBoxPage.lblPermanetAddInput, inputPermanetAdd);
+		textBoxPage.inputData(textBoxPage.lblInputFullName, inputFullName);
+		textBoxPage.inputData(textBoxPage.lblInputEmail, inputEmail);
+		textBoxPage.inputData(textBoxPage.lblInputCurrentAdd, inputCurrentAdd);
+		textBoxPage.inputData(textBoxPage.lblInputPermanentAdd, inputPermenantAdd);
 		textBoxPage.clickSubmit();
-
-		// check red border
-		assertTrue(textBoxPage.checkRedBorder(textBoxPage.lblEmailInput));
-
-		// check do not save in server
-		assertTrue(textBoxPage.checkSaveServer(textBoxPage.lblOutputArea));
-
+		
+		assertTrue(textBoxPage.getErrorField(textBoxPage.lblInputEmail));
+		assertTrue(textBoxPage.getUnSaveServe(textBoxPage.lblOuputArea));
 	}
 
-	@Test(groups = "validation")
-	public void emailFormatWithoutDomain() throws InterruptedException {
-
+	@Test(groups = "validation case: without @ in email")
+	public void submiInvalidEmail_2() throws InterruptedException {
 		String inputFullName = "Do Hoai Thuong";
-		String inputEmail = "dohoaithuong1989@";
-		String inputCurrentAdd = "Ha Noi";
-		String inputPermanetAdd = "HCM";
+		String inputEmail = "abc@";
+		String inputCurrentAdd = "HN";
+		String inputPermenantAdd = "HCM";
 
-		openTextBoxPage();
+		openTexBoxPage();
 
-		textBoxPage.inputText(textBoxPage.lblNameInput, inputFullName);
-		textBoxPage.inputText(textBoxPage.lblEmailInput, inputEmail);
-		textBoxPage.inputText(textBoxPage.lblCurrentAddInput, inputCurrentAdd);
-		textBoxPage.inputText(textBoxPage.lblPermanetAddInput, inputPermanetAdd);
+		textBoxPage.inputData(textBoxPage.lblInputFullName, inputFullName);
+		textBoxPage.inputData(textBoxPage.lblInputEmail, inputEmail);
+		textBoxPage.inputData(textBoxPage.lblInputCurrentAdd, inputCurrentAdd);
+		textBoxPage.inputData(textBoxPage.lblInputPermanentAdd, inputPermenantAdd);
 		textBoxPage.clickSubmit();
-
-		// check red border
-		assertTrue(textBoxPage.checkRedBorder(textBoxPage.lblEmailInput));
-
-		// check do not save in server
-		// assertFalse(!testBase.driver.findElement(textBoxPage.lblOutputArea).isDisplayed());
-		assertTrue(textBoxPage.checkSaveServer(textBoxPage.lblOutputArea));
+		
+		assertTrue(textBoxPage.getErrorField(textBoxPage.lblInputEmail));
+		assertTrue(textBoxPage.getUnSaveServe(textBoxPage.lblOuputArea));
 	}
-
 }

@@ -11,9 +11,9 @@ public class ElementPage extends Pages {
 	}
 
 	public TextBoxPage clickTextBox() {
-		WebElement textBoxMenu = dr.findElement(By.xpath("//span[text()='Text Box']"));
+		WebElement textBoxMenu = drPage.findElement(By.xpath("//span[text()='Text Box']"));
 		textBoxMenu.click();
-		return new TextBoxPage(dr);
+		return new TextBoxPage(drPage);
 	}
 
 }

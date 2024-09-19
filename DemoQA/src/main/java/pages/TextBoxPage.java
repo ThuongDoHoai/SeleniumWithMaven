@@ -1,74 +1,68 @@
 package pages;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import commons.TestBase;
+
 public class TextBoxPage extends Pages {
 
-	public By lblNameInput = By.xpath("//input[@id='userName']");
-	public By lblEmailInput = By.xpath("//input[@id='userEmail']");
-	public By lblCurrentAddInput = By.xpath("//textarea[@id='currentAddress']");
-	public By lblPermanetAddInput = By.xpath("//textarea[@id='permanentAddress']");
+	public By lblInputFullName = By.xpath("//input[@id='userName']");
+	public By lblInputEmail = By.xpath("//input[@id='userEmail']");
+	public By lblInputCurrentAdd = By.xpath("//textarea[@id='currentAddress']");
+	public By lblInputPermanentAdd = By.xpath("//textarea[@id='permanentAddress']");
 
-	public By lblNameOutput = By.xpath("//div[@id='output']//p[@id='name']");
-	public By lblEmailOutput = By.xpath("//div[@id='output']//p[@id='email']");
-	public By lblCurrentAddOutput = By.xpath("//div[@id='output']//p[@id='currentAddress']");
-	public By lblPermanetAddOutput = By.xpath("//div[@id='output']//p[@id='permanentAddress']");
+	public By lblOuputFullName = By.xpath("//p[@id='name']");
+	public By lblOutputEmail = By.xpath("//p[@id='email']");
+	public By lblOutputCurrentAdd = By.xpath("//p[@id='currentAddress']");
+	public By lblOutputPermanentAdd = By.xpath("//p[@id='permanentAddress']");
 	
-	public By lblOutputArea = By.xpath("//div[@id='output']/div");
+	public By lblOuputArea = By.xpath("//div[@id='output']/div");
 
-	//constructor
-	public TextBoxPage(WebDriver driverWeb) {
-		super(driverWeb);
+	public TextBoxPage(WebDriver driver) {
+		super(driver);
 	}
 
-	public void inputText(By locator, String inputValue) {
-		dr.findElement(locator).sendKeys(inputValue);
+	public void inputData(By locator, String value) {
+		WebElement control = drPage.findElement(locator);
+		control.sendKeys(value);
 	}
 
 	public void clickSubmit() {
-		WebElement submitButton = dr.findElement(By.xpath("//button[@id='submit']"));
-		JavascriptExecutor js = (JavascriptExecutor) dr;
+		WebElement submitButton = drPage.findElement(By.xpath("//button[@id='submit']"));
+
+		JavascriptExecutor js = (JavascriptExecutor) drPage;
 		js.executeScript("arguments[0].scrollIntoView(true);", submitButton);
+
 		submitButton.click();
 	}
 
-	public String getTextAfterSubmit(By locator) {
-		int indexColon;
-		
-		WebElement control = dr.findElement(locator);
-		String outputText = control.getText();
+	public String getTextAfterSubmit(By locator) {	
+		String text = drPage.findElement(locator).getText();
 
-		indexColon = outputText.indexOf(":");
-		String result = outputText.substring(indexColon + 1);
+		int index = text.indexOf(":");
+		String result = text.substring(index + 1);
 
 		return result;
-	}
-	
-	
-	public boolean checkRedBorder(By locator) {
-		WebElement control = dr.findElement(locator);
-		String checkError = control.getAttribute("class");
-		
-		if(checkError.contains("field-error")) {
-			return true;
-		}
-		return false;
-		
-	}
-	
-	public boolean checkSaveServer(By locator) {
-		WebElement control = dr.findElement(locator);
-		String checkError = control.getAttribute("class");
-		
-		if(checkError.contains("undefined")) {
-			return true;
-		}
-		return false;
-	}
 
+	}
+	
+	public boolean getErrorField(By locator) {
+		String attributeValue = drPage.findElement(locator).getAttribute("class");
+		
+		if(attributeValue.contains("field-error")) {
+			return true;
+		}
+		else return false;
+	}
+	
+	public boolean getUnSaveServe(By locator) {
+		String attributeValue = drPage.findElement(locator).getAttribute("class");
+		
+		if (attributeValue.contains("undefined")) {
+			return true;
+		}else return false;
+	}
 }

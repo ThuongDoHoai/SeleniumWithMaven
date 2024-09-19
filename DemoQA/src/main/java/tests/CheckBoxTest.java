@@ -34,7 +34,7 @@ public class CheckBoxTest extends TestCase {
 	@Test
 	public void checkSubCheckBoxs() {
 		String[] expectLable = { "Home", "Desktop", "Documents", "Downloads" };
-		int count = 0;
+		int index = 0;
 
 		openCheckBoxPage();
 		checkBoxPage.clickCheckBoxHome();
@@ -43,10 +43,10 @@ public class CheckBoxTest extends TestCase {
 		List<WebElement> checkBoxs = checkBoxPage.drPage.findElements(By.xpath("//span[@class='rct-checkbox']/*[name()='svg']"));
 		List<WebElement> titles = checkBoxPage.drPage.findElements(By.xpath("//span[@class='rct-title']"));
 
-		while (count < 4) {
-			assertTrue(checkBoxPage.getCheckingStatus(checkBoxs.get(count)));
-			assertEquals(checkBoxPage.getlableSubCheckBoxs(titles.get(count)), expectLable[count]);
-			count++;
+		while (index < 4) {
+			assertTrue(checkBoxPage.getCheckingStatus(checkBoxs.get(index)));
+			assertEquals(checkBoxPage.getlableSubCheckBoxs(titles.get(index)), expectLable[index]);
+			index++;
 		}
 
 	}

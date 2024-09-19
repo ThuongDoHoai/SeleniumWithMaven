@@ -16,7 +16,6 @@ public class HomePage extends Pages {
 		WebElement elementMenu = drPage.findElement(By.xpath("//h5[text()='Elements']"));
 
 		JavascriptExecutor js = (JavascriptExecutor) drPage;
-
 		js.executeScript("arguments[0].scrollIntoView(true);", elementMenu);
 
 		elementMenu.click();

@@ -8,13 +8,18 @@ public class PracticeFormTest extends TestCase {
 
 	@Test
 	public void inputSuccessfully() {
-		String inputDate = "15 September 1998";
-	//	PracticeFormPage formpage = new PracticeFormPage(testBase.driver);
-		//todo
-		
-	//	formpage.inputData();
-		
+		String inputDate = "13 January 1989";
+		String gender = "Male";
+		String hobbies = "Sports";
+		String state = "Haryana";
+		String city = "Karnal";
+
+		openPracticeFormPage();
+
+		practiceFormPage.inputDate(inputDate);
+		practiceFormPage.inputGender(gender);
+		practiceFormPage.inputHobbies(hobbies);
+
 	}
-	
 
 }

@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeClass;
 
 import commons.TestBase;
 import pages.CheckBoxPage;
+import pages.PracticeFormPage;
 import pages.TextBoxPage;
 
 public class TestCase {
@@ -12,6 +13,7 @@ public class TestCase {
 	public TestBase drTest = new TestBase();
 	public TextBoxPage textBoxPage;
 	public CheckBoxPage checkBoxPage;
+	public PracticeFormPage practiceFormPage;
 
 	@BeforeClass
 	public void openPage() throws InterruptedException {
@@ -28,6 +30,12 @@ public class TestCase {
 		drTest.driver.navigate().to("https://demoqa.com/checkbox");
 		checkBoxPage = new CheckBoxPage(drTest.driver);
 		return checkBoxPage;
+	}
+	
+	public PracticeFormPage openPracticeFormPage() {
+		drTest.driver.navigate().to("https://demoqa.com/automation-practice-form");
+		practiceFormPage = new PracticeFormPage(drTest.driver);
+		return practiceFormPage;
 	}
 
 	// @AfterClass

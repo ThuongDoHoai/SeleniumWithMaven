@@ -16,7 +16,7 @@ import pages.TextBoxPage;
 
 public class TextBoxTest extends TestCase {
 
-	//@Test
+	@Test
 	public void submitSuccessfully() throws InterruptedException {
 
 		String inputFullName = "Do Hoai Thuong";
@@ -28,22 +28,23 @@ public class TextBoxTest extends TestCase {
 
 		openTexBoxPage();
 
-		textBoxPage.inputData(textBoxPage.lblInputFullName, inputFullName);
-		textBoxPage.inputData(textBoxPage.lblInputEmail, inputEmail);
-		textBoxPage.inputData(textBoxPage.lblInputCurrentAdd, inputCurrentAdd);
-		textBoxPage.inputData(textBoxPage.lblInputPermanentAdd, inputPermenantAdd);
+		testBase.inputText(textBoxPage.inputFullName, inputFullName);
+		testBase.inputText(textBoxPage.inputEmail, inputEmail);
+		testBase.inputText(textBoxPage.inputCurrentAdd, inputCurrentAdd);
+		testBase.inputText(textBoxPage.inputPermanentAdd, inputPermenantAdd);
+
 		textBoxPage.clickSubmit();
 
-		actualOuput = textBoxPage.getTextAfterSubmit(textBoxPage.lblOuputFullName);
+		actualOuput = textBoxPage.getTextAfterSubmit(textBoxPage.outputFullName);
 		assertEquals(actualOuput, inputFullName);
 
-		actualOuput = textBoxPage.getTextAfterSubmit(textBoxPage.lblOutputEmail);
+		actualOuput = textBoxPage.getTextAfterSubmit(textBoxPage.outputEmail);
 		assertEquals(actualOuput, inputEmail);
 
-		actualOuput = textBoxPage.getTextAfterSubmit(textBoxPage.lblOutputCurrentAdd);
+		actualOuput = textBoxPage.getTextAfterSubmit(textBoxPage.outputCurrentAdd);
 		assertEquals(actualOuput, inputCurrentAdd);
 
-		actualOuput = textBoxPage.getTextAfterSubmit(textBoxPage.lblOutputPermanentAdd);
+		actualOuput = textBoxPage.getTextAfterSubmit(textBoxPage.outputPermanentAdd);
 		assertEquals(actualOuput, inputPermenantAdd);
 
 	}
@@ -57,14 +58,14 @@ public class TextBoxTest extends TestCase {
 
 		openTexBoxPage();
 
-		textBoxPage.inputData(textBoxPage.lblInputFullName, inputFullName);
-		textBoxPage.inputData(textBoxPage.lblInputEmail, inputEmail);
-		textBoxPage.inputData(textBoxPage.lblInputCurrentAdd, inputCurrentAdd);
-		textBoxPage.inputData(textBoxPage.lblInputPermanentAdd, inputPermenantAdd);
+		testBase.inputText(textBoxPage.inputFullName, inputFullName);
+		testBase.inputText(textBoxPage.inputEmail, inputEmail);
+		testBase.inputText(textBoxPage.inputCurrentAdd, inputCurrentAdd);
+		testBase.inputText(textBoxPage.inputPermanentAdd, inputPermenantAdd);
 		textBoxPage.clickSubmit();
-		
-		assertTrue(textBoxPage.getErrorField(textBoxPage.lblInputEmail));
-		assertTrue(textBoxPage.getUnSaveServe(textBoxPage.lblOuputArea));
+
+		assertTrue(textBoxPage.getErrorField(textBoxPage.inputEmail));
+		assertTrue(textBoxPage.getUnSaveServe(textBoxPage.outputArea));
 	}
 
 	@Test(groups = "validation case: without @ in email")
@@ -76,13 +77,13 @@ public class TextBoxTest extends TestCase {
 
 		openTexBoxPage();
 
-		textBoxPage.inputData(textBoxPage.lblInputFullName, inputFullName);
-		textBoxPage.inputData(textBoxPage.lblInputEmail, inputEmail);
-		textBoxPage.inputData(textBoxPage.lblInputCurrentAdd, inputCurrentAdd);
-		textBoxPage.inputData(textBoxPage.lblInputPermanentAdd, inputPermenantAdd);
+		testBase.inputText(textBoxPage.inputFullName, inputFullName);
+		testBase.inputText(textBoxPage.inputEmail, inputEmail);
+		testBase.inputText(textBoxPage.inputCurrentAdd, inputCurrentAdd);
+		testBase.inputText(textBoxPage.inputPermanentAdd, inputPermenantAdd);
 		textBoxPage.clickSubmit();
-		
-		assertTrue(textBoxPage.getErrorField(textBoxPage.lblInputEmail));
-		assertTrue(textBoxPage.getUnSaveServe(textBoxPage.lblOuputArea));
+
+		assertTrue(textBoxPage.getErrorField(textBoxPage.inputEmail));
+		assertTrue(textBoxPage.getUnSaveServe(textBoxPage.outputArea));
 	}
 }

@@ -1,11 +1,14 @@
 package pages;
 
 import java.time.Duration;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -17,18 +20,30 @@ public class PracticeFormPage extends Pages {
 	public WebElement inputLastName = drPage.findElement(By.id("lastName"));
 	public WebElement inputEmail = drPage.findElement(By.id("userEmail"));
 	public WebElement inputPhone = drPage.findElement(By.id("userNumber"));
-	public WebElement inputSubject = drPage.findElement(By.id("subjectsInput"));
+	public WebElement inputSubject = drPage.findElement(By.xpath("//input[@id='subjectsInput']"));
 	public WebElement inputCurrentAdd = drPage.findElement(By.id("currentAddress"));
-	public WebElement inputSate = drPage.findElement(By.id("state"));
-	public WebElement inputCity = drPage.findElement(By.id("city"));
+
 
 	public PracticeFormPage(WebDriver driver) {
 		super(driver);
 	}
 
-	public void inputData(String name, String email, String gender, String phone, String DOB, String subject,
-			String hobbies, String currentAdd, String stateCity) {
+	public void inputData(String firstName, String lastName, String email, String gender, String phone, String DOB,
+			String subject, String hobbies, String currentAdd, String state, String city) {
+		inputText(inputFirstName, firstName);
+		inputText(inputLastName, lastName);
+		inputText(inputEmail, email);
+		inputGender(gender);
+		inputText(inputPhone, phone);
+		inputDate(DOB);
+		inputText(inputSubject, subject);
+		inputHobbies(hobbies);
+		inputText(inputCurrentAdd, currentAdd);
+		inputStateCity(state, city);
+	}
 
+	public void inputText(WebElement locator, String inputData) {
+		locator.sendKeys(inputData);
 	}
 
 	public void inputDate(String inputDate) {
@@ -55,6 +70,8 @@ public class PracticeFormPage extends Pages {
 		switch (gender) {
 		case "Male":
 			pathGender = "//label[@for='gender-radio-1']";
+			// pathGender = "//input[@id='gender-radio-1']";
+
 			break;
 		case "Female":
 			pathGender = "//label[@for='gender-radio-2']";
@@ -64,12 +81,15 @@ public class PracticeFormPage extends Pages {
 			break;
 		}
 
-		WebElement checkGender = drPage.findElement(By.xpath(pathGender));
+		WebElement element = drPage.findElement(By.xpath(pathGender));
 
 		JavascriptExecutor js = (JavascriptExecutor) drPage;
-		js.executeScript("arguments[0].scrollIntoView(true);", checkGender);
+		js.executeScript("arguments[0].scrollIntoView(true);", element);
+		element.click();
 
-		checkGender.click();
+		// WebElement element = new WebDriverWait(drPage,
+		// Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='gender-radio-1']")));
+		// ((JavascriptExecutor)drPage).executeScript("arguments[0].click();", element);
 
 	}
 
@@ -81,10 +101,10 @@ public class PracticeFormPage extends Pages {
 			pathHobbies = "//label[@for='hobbies-checkbox-1']";
 			break;
 		case "Reading":
-			pathHobbies = "//input[@id='hobbies-checkbox-2']";
+			pathHobbies = "//label[@for='hobbies-checkbox-2']";
 			break;
 		case "Music":
-			pathHobbies = "//input[@id='hobbies-checkbox-3']";
+			pathHobbies = "//label[@for='hobbies-checkbox-3']";
 			break;
 		}
 
@@ -96,8 +116,45 @@ public class PracticeFormPage extends Pages {
 		checkHobbies.click();
 	}
 
-	public void inputDropdown(WebElement locator, String inputOption) {
-		Select selectDropdown = new Select(locator);
-		selectDropdown.selectByVisibleText(inputOption);
+	public void inputStateCity(String inputState, String inputCity) {
+		WebElement elementState = drPage.findElement(By.xpath("//input[@id='react-select-3-input']"));
+		JavascriptExecutor js = (JavascriptExecutor) drPage;
+		js.executeScript("arguments[0].scrollIntoView(true);", elementState);
+
+		elementState.sendKeys(inputState);
+		elementState.sendKeys(Keys.ENTER);
+
+		WebElement elementCity = drPage.findElement(By.xpath("//input[@id='react-select-4-input']"));
+		js.executeScript("arguments[0].scrollIntoView(true);", elementCity);
+
+		elementCity.sendKeys(inputCity);
+		elementCity.sendKeys(Keys.ENTER);
+
+	}
+
+	public void clickSubmit() {
+		WebElement submitButton = drPage.findElement(By.xpath("//button[@id='submit']"));
+
+		JavascriptExecutor js = (JavascriptExecutor) drPage;
+		js.executeScript("arguments[0].scrollIntoView(true);", submitButton);
+
+		submitButton.click();
+	}
+
+	public String[] getTextAfterSubmit() {
+
+		List<WebElement> listOutput = drPage.findElements(By.xpath("//div[@class='table-responsive']//tbody//td"));
+
+		int i = 0;
+
+		String[] output = new String [20];
+
+		for (WebElement e : listOutput) {
+			output[i] = e.getText();
+			i++;
+		}
+
+		return output;
+
 	}
 }

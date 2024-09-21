@@ -9,25 +9,20 @@ import commons.TestBase;
 
 public class TextBoxPage extends Pages {
 
-	public By lblInputFullName = By.xpath("//input[@id='userName']");
-	public By lblInputEmail = By.xpath("//input[@id='userEmail']");
-	public By lblInputCurrentAdd = By.xpath("//textarea[@id='currentAddress']");
-	public By lblInputPermanentAdd = By.xpath("//textarea[@id='permanentAddress']");
+	public WebElement inputFullName = drPage.findElement(By.xpath("//input[@id='userName']"));
+	public WebElement inputEmail = drPage.findElement(By.xpath("//input[@id='userEmail']"));
+	public WebElement inputCurrentAdd = drPage.findElement(By.xpath("//textarea[@id='currentAddress']"));
+	public WebElement inputPermanentAdd = drPage.findElement(By.xpath("//textarea[@id='permanentAddress']"));
 
-	public By lblOuputFullName = By.xpath("//p[@id='name']");
-	public By lblOutputEmail = By.xpath("//p[@id='email']");
-	public By lblOutputCurrentAdd = By.xpath("//p[@id='currentAddress']");
-	public By lblOutputPermanentAdd = By.xpath("//p[@id='permanentAddress']");
-	
-	public By lblOuputArea = By.xpath("//div[@id='output']/div");
+	public By outputFullName = By.xpath("//div[@id='output']//p[@id='name']");
+	public By outputEmail = By.xpath("//div[@id='output']//p[@id='email']");
+	public By outputCurrentAdd = By.xpath("//div[@id='output']//p[@id='currentAddress']");
+	public By outputPermanentAdd = By.xpath("//div[@id='output']//p[@id='permanentAddress']");
+
+	public By outputArea = By.xpath("//div[@id='output']/div");
 
 	public TextBoxPage(WebDriver driver) {
 		super(driver);
-	}
-
-	public void inputData(By locator, String value) {
-		WebElement control = drPage.findElement(locator);
-		control.sendKeys(value);
 	}
 
 	public void clickSubmit() {
@@ -39,7 +34,8 @@ public class TextBoxPage extends Pages {
 		submitButton.click();
 	}
 
-	public String getTextAfterSubmit(By locator) {	
+	public String getTextAfterSubmit(By locator) {
+
 		String text = drPage.findElement(locator).getText();
 
 		int index = text.indexOf(":");
@@ -48,21 +44,22 @@ public class TextBoxPage extends Pages {
 		return result;
 
 	}
-	
-	public boolean getErrorField(By locator) {
-		String attributeValue = drPage.findElement(locator).getAttribute("class");
-		
-		if(attributeValue.contains("field-error")) {
+
+	public boolean getErrorField(WebElement locator) {
+		String attributeValue = locator.getAttribute("class");
+
+		if (attributeValue.contains("field-error")) {
 			return true;
-		}
-		else return false;
+		} else
+			return false;
 	}
-	
+
 	public boolean getUnSaveServe(By locator) {
 		String attributeValue = drPage.findElement(locator).getAttribute("class");
-		
+
 		if (attributeValue.contains("undefined")) {
 			return true;
-		}else return false;
+		} else
+			return false;
 	}
 }

@@ -1,6 +1,7 @@
 package commons;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class TestBase {
@@ -19,6 +20,10 @@ public class TestBase {
 		Thread.sleep(5000);
 		
 		driver.manage().window().maximize(); 
+	}
+	
+	public void inputText(WebElement locator, String inputData) {
+		locator.sendKeys(inputData);
 	}
 	
 }

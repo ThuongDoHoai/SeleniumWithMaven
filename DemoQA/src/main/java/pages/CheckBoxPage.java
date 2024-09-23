@@ -20,24 +20,23 @@ public class CheckBoxPage extends Pages {
 
 		if (attribute.contains("uncheck")) {
 			return true;
-		} 
-		else return false;
+		} else
+			return false;
 	}
-	
+
 	public boolean getCheckingStatus(WebElement locator) {
 		String attribute = locator.getAttribute("class");
 
 		if (attribute.contains("check")) {
 			return true;
-		} 
-		else return false;
+		} else
+			return false;
 	}
-	
 
 	public void clickCheckBoxHome() {
 		checkBoxHome.click();
 	}
-	
+
 	public void clickArrowHome() {
 		arrowHome.click();
 	}

@@ -32,14 +32,12 @@ public class TestCase {
 		checkBoxPage = new CheckBoxPage(testBase.driver);
 		return checkBoxPage;
 	}
-	
+
 	public PracticeFormPage openPracticeFormPage() {
 		testBase.driver.navigate().to("https://demoqa.com/automation-practice-form");
 		practiceFormPage = new PracticeFormPage(testBase.driver);
 		return practiceFormPage;
 	}
-	
-	
 
 	// @AfterClass
 	public void tearDown() {

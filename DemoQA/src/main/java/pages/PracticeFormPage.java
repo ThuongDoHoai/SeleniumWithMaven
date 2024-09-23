@@ -19,18 +19,18 @@ public class PracticeFormPage extends Pages {
 	public WebElement inputState = drPage.findElement(By.xpath("//input[@id='react-select-3-input']"));
 	public WebElement inputCity = drPage.findElement(By.xpath("//input[@id='react-select-4-input']"));
 	public WebElement uploadButton = drPage.findElement(By.id("uploadPicture"));
-	
-	public String genderXpath = "//label[text()='{@param}']"; 
-	public String hobbiesXpath ="//label[text()='{@param}']";
+
+	public String genderXpath = "//label[text()='{@param}']";
+	public String hobbiesXpath = "//label[text()='{@param}']";
 
 	public WebElement submitButton = drPage.findElement(By.xpath("//button[@id='submit']"));
-	
+
 	public PracticeFormPage(WebDriver driver) {
 		super(driver);
 	}
 
 	public void inputData(String firstName, String lastName, String email, String gender, String phone, String DOB,
-		String subject, String hobbies, String filePath, String currentAdd, String state, String city) {
+			String subject, String hobbies, String filePath, String currentAdd, String state, String city) {
 		testBase.inputText(inputFirstName, firstName);
 		testBase.inputText(inputLastName, lastName);
 		testBase.inputText(inputEmail, email);
@@ -38,12 +38,12 @@ public class PracticeFormPage extends Pages {
 		testBase.inputText(inputPhone, phone);
 		inputDate(DOB);
 		testBase.inputMultipleToCombobox(inputSubject, subject);
-		
-		//scroll page down
+
+		// scroll page down
 		JavascriptExecutor js = (JavascriptExecutor) drPage;
 		js.executeScript("arguments[0].scrollIntoView(true);", submitButton);
-		
-		//continue input data
+
+		// continue input data
 		testBase.inputCheckbox(hobbiesXpath, hobbies);
 		testBase.uploadFile(uploadButton, filePath);
 		testBase.inputText(inputCurrentAdd, currentAdd);
@@ -74,7 +74,7 @@ public class PracticeFormPage extends Pages {
 
 		int i = 0;
 
-		String[] output = new String [20];
+		String[] output = new String[20];
 
 		for (WebElement e : listOutput) {
 			output[i] = e.getText();

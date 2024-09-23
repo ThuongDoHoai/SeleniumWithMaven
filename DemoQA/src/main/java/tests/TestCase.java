@@ -2,6 +2,7 @@ package tests;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
 
 import commons.TestBase;
 import pages.CheckBoxPage;
@@ -15,7 +16,7 @@ public class TestCase {
 	public CheckBoxPage checkBoxPage;
 	public PracticeFormPage practiceFormPage;
 
-	@BeforeClass
+	@BeforeTest
 	public void openPage() throws InterruptedException {
 		testBase.openPage();
 	}
@@ -37,6 +38,8 @@ public class TestCase {
 		practiceFormPage = new PracticeFormPage(testBase.driver);
 		return practiceFormPage;
 	}
+	
+	
 
 	// @AfterClass
 	public void tearDown() {

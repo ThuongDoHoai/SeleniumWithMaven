@@ -55,7 +55,7 @@ public class TextBoxPage extends Pages {
 	}
 
 	public boolean getUnSaveServe(By locator) {
-		String attributeValue = drPage.findElement(locator).getAttribute("class");
+		String attributeValue = drPage.findElement(locator).getAttribute("class"); 
 
 		if (attributeValue.contains("undefined")) {
 			return true;

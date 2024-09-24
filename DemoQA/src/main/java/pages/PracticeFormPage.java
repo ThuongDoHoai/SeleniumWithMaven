@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 
 public class PracticeFormPage extends Pages {
 
+	// all element in Practice Form Page
 	public WebElement inputFirstName = drPage.findElement(By.id("firstName"));
 	public WebElement inputLastName = drPage.findElement(By.id("lastName"));
 	public WebElement inputEmail = drPage.findElement(By.id("userEmail"));
@@ -19,6 +20,12 @@ public class PracticeFormPage extends Pages {
 	public WebElement inputState = drPage.findElement(By.xpath("//input[@id='react-select-3-input']"));
 	public WebElement inputCity = drPage.findElement(By.xpath("//input[@id='react-select-4-input']"));
 	public WebElement uploadButton = drPage.findElement(By.id("uploadPicture"));
+
+	// element of Date field
+	public String firstClick = "//input[@id='dateOfBirthInput']";
+	public String locatorYear = "//select[@class='react-datepicker__year-select']";
+	public String locatorMonth = "//select[@class='react-datepicker__month-select']";
+	public String pathDate = "//div[@class='react-datepicker__day react-datepicker__day--0{@param}']";
 
 	public String genderXpath = "//label[text()='{@param}']";
 	public String hobbiesXpath = "//label[text()='{@param}']";
@@ -36,7 +43,7 @@ public class PracticeFormPage extends Pages {
 		testBase.inputText(inputEmail, email);
 		testBase.inputRadio(genderXpath, gender);
 		testBase.inputText(inputPhone, phone);
-		inputDate(DOB);
+		testBase.inputDateByClickDatePicker(firstClick, locatorYear, locatorMonth, pathDate, DOB);
 		testBase.inputMultipleToCombobox(inputSubject, subject);
 
 		// scroll page down
@@ -49,23 +56,6 @@ public class PracticeFormPage extends Pages {
 		testBase.inputText(inputCurrentAdd, currentAdd);
 		testBase.inputDropdown(inputState, state);
 		testBase.inputDropdown(inputCity, city);
-	}
-
-	public void inputDate(String inputDate) {
-		String[] inputDateSpit = inputDate.split(" ");
-		String pathDate = "//div[@class='react-datepicker__day react-datepicker__day--0" + inputDateSpit[0] + "']";
-
-		drPage.findElement(By.xpath("//input[@id='dateOfBirthInput']")).click();
-
-		WebElement year = drPage.findElement(By.xpath("//select[@class='react-datepicker__year-select']"));
-		Select selectYear = new Select(year);
-		selectYear.selectByVisibleText(inputDateSpit[2]);
-
-		WebElement month = drPage.findElement(By.xpath("//select[@class='react-datepicker__month-select']"));
-		Select selectMonth = new Select(month);
-		selectMonth.selectByVisibleText(inputDateSpit[1]);
-
-		drPage.findElement(By.xpath(pathDate)).click();
 	}
 
 	public String[] getTextAfterSubmit() {
@@ -84,4 +74,22 @@ public class PracticeFormPage extends Pages {
 		return output;
 
 	}
+	
+	public boolean getErrorField(WebElement locator) {
+		String attributeValue = locator.getAttribute("required");
+
+		if (attributeValue.contains("field-error")) {
+			return true;
+		} else
+			return false;
+	}
+	
+	public boolean checkRequiredField(WebElement locator) {
+		String checkMandatory = locator.getAttribute("required");
+		if(checkMandatory != null) 
+			return true;
+		else
+			return false;
+	}
+
 }

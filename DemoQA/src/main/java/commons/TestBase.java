@@ -6,6 +6,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import pages.PracticeFormPage;
 
@@ -59,6 +60,26 @@ public class TestBase {
 	public void inputDropdown(WebElement locator, String inputValue) {
 		locator.sendKeys(inputValue);
 		locator.sendKeys(Keys.ENTER);
+	}
+
+	public void inputDateByClickDatePicker(String firstClick, String locatorYear, String locatorMonth, String pathDate,
+			String inputValue) {
+		String[] inputDateSplit = inputValue.split(" ");
+
+		WebElement elementClick = driver.findElement(By.xpath(firstClick));
+		elementClick.click();
+
+		WebElement elmentYear = driver.findElement(By.xpath(locatorYear));
+		Select selectYear = new Select(elmentYear);
+		selectYear.selectByVisibleText(inputDateSplit[2]);
+
+		WebElement elementMonth = driver.findElement(By.xpath(locatorMonth));
+		Select selectMonth = new Select(elementMonth);
+		selectMonth.selectByVisibleText(inputDateSplit[1]);
+
+		String newPathDate = pathDate.replace("{@param}", inputDateSplit[0]);
+		WebElement elementDate = driver.findElement(By.xpath(newPathDate));
+		elementDate.click();
 	}
 
 	public void uploadFile(WebElement locator, String filePath) {

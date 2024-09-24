@@ -2,19 +2,19 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-09-24T01:03:59 ICT" name="Default suite" finished-at="2024-09-24T01:04:37 ICT" duration-ms="37644">
+  <suite started-at="2024-09-25T01:02:12 ICT" name="Default suite" finished-at="2024-09-25T01:03:10 ICT" duration-ms="58142">
     <groups>
     </groups>
-    <test started-at="2024-09-24T01:03:59 ICT" name="Default test" finished-at="2024-09-24T01:04:37 ICT" duration-ms="37644">
+    <test started-at="2024-09-25T01:02:12 ICT" name="Default test" finished-at="2024-09-25T01:03:10 ICT" duration-ms="58142">
       <class name="tests.PracticeFormTest">
-        <test-method is-config="true" signature="openPage()[pri:0, instance:tests.PracticeFormTest@4cc451f2]" started-at="2024-09-24T01:03:59 ICT" name="openPage" finished-at="2024-09-24T01:04:15 ICT" duration-ms="16067" status="PASS">
+        <test-method is-config="true" signature="openPage()[pri:0, instance:tests.PracticeFormTest@6379eb]" started-at="2024-09-25T01:02:12 ICT" name="openPage" finished-at="2024-09-25T01:02:33 ICT" duration-ms="21032" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openPage -->
-        <test-method signature="inputSuccessfully()[pri:0, instance:tests.PracticeFormTest@4cc451f2]" started-at="2024-09-24T01:04:16 ICT" name="inputSuccessfully" finished-at="2024-09-24T01:04:37 ICT" duration-ms="21431" status="PASS">
+        <test-method signature="checkMandatoryField()[pri:0, instance:tests.PracticeFormTest@6379eb]" started-at="2024-09-25T01:02:33 ICT" name="checkMandatoryField" finished-at="2024-09-25T01:03:10 ICT" duration-ms="36958" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- inputSuccessfully -->
+        </test-method> <!-- checkMandatoryField -->
       </class> <!-- tests.PracticeFormTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->

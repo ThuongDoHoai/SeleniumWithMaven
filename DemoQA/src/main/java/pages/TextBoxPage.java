@@ -5,96 +5,61 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import commons.TestBase;
+
 public class TextBoxPage extends Pages {
 
-	public TextBoxPage(WebDriver BaseDr) {
-		super(BaseDr);
+	public WebElement inputFullName = drPage.findElement(By.xpath("//input[@id='userName']"));
+	public WebElement inputEmail = drPage.findElement(By.xpath("//input[@id='userEmail']"));
+	public WebElement inputCurrentAdd = drPage.findElement(By.xpath("//textarea[@id='currentAddress']"));
+	public WebElement inputPermanentAdd = drPage.findElement(By.xpath("//textarea[@id='permanentAddress']"));
+
+	public By outputFullName = By.xpath("//div[@id='output']//p[@id='name']");
+	public By outputEmail = By.xpath("//div[@id='output']//p[@id='email']");
+	public By outputCurrentAdd = By.xpath("//div[@id='output']//p[@id='currentAddress']");
+	public By outputPermanentAdd = By.xpath("//div[@id='output']//p[@id='permanentAddress']");
+
+	public By outputArea = By.xpath("//div[@id='output']/div");
+
+	public TextBoxPage(WebDriver driver) {
+		super(driver);
 	}
-	
-	//
-	//TC-01_Submit success
-	//
-	public void inputValidData() {
-		WebElement fullNameField = dr.findElement(By.xpath("//input[@id='userName']"));
-		fullNameField.sendKeys("Do Hoai Thuong");
 
-		WebElement emailField = dr.findElement(By.xpath("//input[@id='userEmail']"));
-		emailField.sendKeys("dohoaithuong1989@gmai.com");
+	public void clickSubmit() {
+		WebElement submitButton = drPage.findElement(By.xpath("//button[@id='submit']"));
 
-		WebElement currentAddressField = dr.findElement(By.xpath("//textarea[@id='currentAddress']"));
-		currentAddressField.sendKeys("Ha Noi");
-
-		WebElement permanetAddressField = dr.findElement(By.xpath("//textarea[@id='permanentAddress']"));
-		permanetAddressField.sendKeys("Thai Nguyen");
-	}
-	
-	public void clickSubmitValid() {
-		WebElement submitButton = dr.findElement(By.xpath("//button[@id='submit']"));
-		
-		JavascriptExecutor js = (JavascriptExecutor) dr;
+		JavascriptExecutor js = (JavascriptExecutor) drPage;
 		js.executeScript("arguments[0].scrollIntoView(true);", submitButton);
-		
+
 		submitButton.click();
 	}
-	
-	//
-	//TC-02_Input invalid data: Email format is wrong (without "@")
-	//
-	public void inputInValidData_1() {
-		WebElement fullNameField = dr.findElement(By.xpath("//input[@id='userName']"));
-		fullNameField.sendKeys("Do Hoai Thuong");
 
-		WebElement emailField = dr.findElement(By.xpath("//input[@id='userEmail']"));
-		emailField.sendKeys("dohoaithuong1989gmai.com");
+	public String getTextAfterSubmit(By locator) {
 
-		WebElement currentAddressField = dr.findElement(By.xpath("//textarea[@id='currentAddress']"));
-		currentAddressField.sendKeys("Ha Noi");
+		String text = drPage.findElement(locator).getText();
 
-		WebElement permanetAddressField = dr.findElement(By.xpath("//textarea[@id='permanentAddress']"));
-		permanetAddressField.sendKeys("Thai Nguyen");
+		int index = text.indexOf(":");
+		String result = text.substring(index + 1);
+
+		return result;
+
 	}
 
-	
-	public void clickSubmitInvalid_1() {
-		WebElement submitButton = dr.findElement(By.xpath("//button[@id='submit']"));
-		
-		JavascriptExecutor js = (JavascriptExecutor) dr;
-		js.executeScript("arguments[0].scrollIntoView(true);", submitButton);
-		
-		submitButton.click();
-		
-		WebElement emailField = dr.findElement(By.xpath("//input[@id='userEmail']"));
-		js.executeScript("arguments[0].scrollIntoView(true);", emailField);
-	}
-	
-	//
-	//TC-03_Input invalid data: Email format is wrong (without domain)
-	//
-	public void inputInValidData_2() {
-		WebElement fullNameField = dr.findElement(By.xpath("//input[@id='userName']"));
-		fullNameField.sendKeys("Do Hoai Thuong");
+	public boolean getErrorField(WebElement locator) {
+		String attributeValue = locator.getAttribute("class");
 
-		WebElement emailField = dr.findElement(By.xpath("//input[@id='userEmail']"));
-		emailField.sendKeys("dohoaithuong1989@");
-
-		WebElement currentAddressField = dr.findElement(By.xpath("//textarea[@id='currentAddress']"));
-		currentAddressField.sendKeys("Ha Noi");
-
-		WebElement permanetAddressField = dr.findElement(By.xpath("//textarea[@id='permanentAddress']"));
-		permanetAddressField.sendKeys("Thai Nguyen");
+		if (attributeValue.contains("field-error")) {
+			return true;
+		} else
+			return false;
 	}
 
-	
-	public void clickSubmitInvalid_2() {
-		WebElement submitButton = dr.findElement(By.xpath("//button[@id='submit']"));
-		
-		JavascriptExecutor js = (JavascriptExecutor) dr;
-		js.executeScript("arguments[0].scrollIntoView(true);", submitButton);
-		
-		submitButton.click();
-		
-		WebElement emailField = dr.findElement(By.xpath("//input[@id='userEmail']"));
-		js.executeScript("arguments[0].scrollIntoView(true);", emailField);
-	}
+	public boolean getUnSaveServe(By locator) {
+		String attributeValue = drPage.findElement(locator).getAttribute("class"); 
 
+		if (attributeValue.contains("undefined")) {
+			return true;
+		} else
+			return false;
+	}
 }

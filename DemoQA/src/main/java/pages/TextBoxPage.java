@@ -1,65 +1,52 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import commons.TestBase;
-
-public class TextBoxPage extends Pages {
-
-	public WebElement inputFullName = drPage.findElement(By.xpath("//input[@id='userName']"));
-	public WebElement inputEmail = drPage.findElement(By.xpath("//input[@id='userEmail']"));
-	public WebElement inputCurrentAdd = drPage.findElement(By.xpath("//textarea[@id='currentAddress']"));
-	public WebElement inputPermanentAdd = drPage.findElement(By.xpath("//textarea[@id='permanentAddress']"));
-
-	public By outputFullName = By.xpath("//div[@id='output']//p[@id='name']");
-	public By outputEmail = By.xpath("//div[@id='output']//p[@id='email']");
-	public By outputCurrentAdd = By.xpath("//div[@id='output']//p[@id='currentAddress']");
-	public By outputPermanentAdd = By.xpath("//div[@id='output']//p[@id='permanentAddress']");
-
-	public By outputArea = By.xpath("//div[@id='output']/div");
+public class TextBoxPage extends Page {
+	
+	public By txtFullName = By.id("userName");
+	public By txtEmail = By.id("userEmail");
+	public By txtCurrAdd = By.id("currentAddress");
+	public By txtPerAdd = By.id("permanentAddress");
+	
+	public By outputName = By.id("name");
+	public By outputEmail = By.id("email");
+	public By outputCurrAdd = By.xpath("//p[@id='currentAddress']");
+	public By outputPerAdd = By.xpath("//p[@id='permanentAddress']");
+	
+	public By btnSubmit = By.id("submit");
 
 	public TextBoxPage(WebDriver driver) {
 		super(driver);
 	}
-
-	public void clickSubmit() {
-		WebElement submitButton = drPage.findElement(By.xpath("//button[@id='submit']"));
-
-		JavascriptExecutor js = (JavascriptExecutor) drPage;
-		js.executeScript("arguments[0].scrollIntoView(true);", submitButton);
-
-		submitButton.click();
+	
+	
+	public void inputDataAllField(String fullName, String email, String currentAdd, String perAdd) throws InterruptedException {
+		testBase.inputText(txtFullName, fullName);
+		testBase.inputText(txtEmail, email);
+		testBase.inputText(txtCurrAdd, currentAdd);
+		testBase.inputText(txtPerAdd, perAdd);
+		
+		testBase.clickButton(btnSubmit);
 	}
-
+	
 	public String getTextAfterSubmit(By locator) {
-
-		String text = drPage.findElement(locator).getText();
-
-		int index = text.indexOf(":");
-		String result = text.substring(index + 1);
-
-		return result;
-
+		WebElement element = testBase.driver.findElement(locator);
+		String output = element.getText();
+		int index = output.indexOf(":");
+		output = output.substring(index+1);
+		return output;
 	}
-
-	public boolean getErrorField(WebElement locator) {
-		String attributeValue = locator.getAttribute("class");
-
-		if (attributeValue.contains("field-error")) {
+	
+	public boolean checkErrorField(By locator) {
+		WebElement element = testBase.driver.findElement(locator);
+		String error_field = element.getAttribute("class");
+		if (error_field.contains("field-error")) {
 			return true;
-		} else
-			return false;
+		}
+		return false;
 	}
 
-	public boolean getUnSaveServe(By locator) {
-		String attributeValue = drPage.findElement(locator).getAttribute("class"); 
-
-		if (attributeValue.contains("undefined")) {
-			return true;
-		} else
-			return false;
-	}
 }

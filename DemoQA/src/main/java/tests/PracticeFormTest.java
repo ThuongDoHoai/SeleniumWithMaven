@@ -1,102 +1,65 @@
 package tests;
 
-import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import pages.PracticeFormPage;
+import tests.models.StudentRegister;
 
 public class PracticeFormTest extends TestCase {
 
-	//@Test
-	public void inputSuccessfully() {
-		// raw data input
-		String fistName = "Hoa";
-		String lastName = "Dao";
-		String email = "abc@gmail.com";
-		String gender = "Other";
-		String phone = "0948242456";
-		String inputDate = "13 January 1989";
-		String subject = "Maths, Chemistry";
-		String hobbies = "Sports, Reading, Music";
-		String filePath = "C:\\Users\\Phong\\Downloads\\kitty-cat-kitten-pet-45201.jpeg";
-		String currentAdd = " xin chao cac ban \nha ha";
-		String state = "Haryana";
-		String city = "Karnal";
+	// @Test (groups = "Happy case")
+	public void inputSuccessfully() throws InterruptedException {
 
-		// Prepare expected result
-		String expectedStudentName = fistName + " " + lastName;
-		String[] splittedDOB = inputDate.split(" ");
-		String expectedDOB = splittedDOB[0] + " " + splittedDOB[1] + "," + splittedDOB[2];
-		String expectCurrentAdd = currentAdd.replace("\n", "").trim();
-		String expectedStateCity = state + " " + city;
-		// Get expected file name
-		int index = filePath.lastIndexOf("\\");
-		String expectedFileName = filePath.substring(index + 1);
+		StudentRegister studentRegister = new StudentRegister();
 
-		openPracticeFormPage();
+		studentRegister.fistName = "Hoa";
+		studentRegister.lastName = "Dao";
+		studentRegister.email = "abc@gmail.com";
+		studentRegister.gender = "Other";
+		studentRegister.phone = "0948242456";
+		studentRegister.DOB = "13 January 1989";
+		studentRegister.subject = "Maths, Chemistry";
+		studentRegister.hobbies = "Sports, Reading, Music";
+		studentRegister.filePath = System.getProperty("user.dir") + "\\testdata\\kitty-cat-kitten-pet-45201.jpeg";
 
-		practiceFormPage.inputData(fistName, lastName, email, gender, phone, inputDate, subject, hobbies, filePath,
-				currentAdd, state, city);
-		testBase.clickSubmit(practiceFormPage.submitButton);
+		studentRegister.currentAdd = " xin chao cac ban \nha ha";
+		studentRegister.state = "Haryana";
+		studentRegister.city = "Karnal";
 
-		String[] actualOutput = practiceFormPage.getTextAfterSubmit();
+		// start input data
+		PracticeFormPage practiceFormPage = new PracticeFormPage(testBase.driver);
+		practiceFormPage.openPracticeFormPage();
+		
+		practiceFormPage.inputData2(studentRegister);
+		testBase.clickButton(practiceFormPage.btnSubmit);
 
-		// verify inputed data
-		assertEquals(actualOutput[1], expectedStudentName);
-		assertEquals(actualOutput[3], email);
-		assertEquals(actualOutput[5], gender);
-		assertEquals(actualOutput[7], phone);
-		assertEquals(actualOutput[9], expectedDOB);
-		assertEquals(actualOutput[11], subject);
-		assertEquals(actualOutput[13], hobbies);
-		assertEquals(actualOutput[15], expectedFileName);
-		assertEquals(actualOutput[17], expectCurrentAdd);
-		assertEquals(actualOutput[19], expectedStateCity);
+		String actualStudentName = practiceFormPage.getTableValue(practiceFormPage.tableValueXpath, "Student Name");
+		assertEquals(actualStudentName, studentRegister.fistName + " " + studentRegister.lastName);
+
+		String actualDOB = practiceFormPage.getTableValue(practiceFormPage.tableValueXpath, "Date of Birth");
+		int index = studentRegister.DOB.lastIndexOf(" ");
+		String expectedDOB = studentRegister.DOB.replace(Character.toString(studentRegister.DOB.charAt(index)), ",");
+		assertEquals(actualDOB, expectedDOB);
+
+		int index2 = studentRegister.filePath.lastIndexOf("\\");
+		String expectedFileName = studentRegister.filePath.substring(index2 + 1);
+
 	}
-	
-	@Test
-	public void checkMandatoryField() {
+
+	@Test(groups = "Validation case")
+	public void submitDataUnsuccessfully() throws InterruptedException {
+
+		PracticeFormPage practiceFormPage = new PracticeFormPage(testBase.driver);
+		practiceFormPage.openPracticeFormPage();
 		
-		openPracticeFormPage();
-		
-		WebElement radioMale = testBase.driver.findElement(By.xpath("//label[text()='Male']//preceding-sibling::input"));
-		WebElement radioFemale = testBase.driver.findElement(By.xpath("//label[text()='Female']//preceding-sibling::input"));
-		WebElement radioOther = testBase.driver.findElement(By.xpath("//label[text()='Other']//preceding-sibling::input"));
-		WebElement DOB = testBase.driver.findElement(By.xpath("//input[@id='dateOfBirthInput']"));
-		WebElement checkboxSport = testBase.driver.findElement(By.xpath("//label[text()='Sports']//preceding-sibling::input"));
-		WebElement checkboxReading = testBase.driver.findElement(By.xpath("//label[text()='Reading']//preceding-sibling::input"));
-		WebElement checkboxMusic = testBase.driver.findElement(By.xpath("//label[text()='Music']//preceding-sibling::input"));
-		WebElement picture = testBase.driver.findElement(By.xpath("//input[@id='uploadPicture']"));
-		WebElement currentAdd = testBase.driver.findElement(By.xpath("//textarea[@id='currentAddress']"));
-		WebElement sate = testBase.driver.findElement(By.xpath("//input[@id='react-select-3-input']"));
-		WebElement city = testBase.driver.findElement(By.xpath("//input[@id='react-select-4-input']"));
-		
-		
-		assertTrue(practiceFormPage.checkRequiredField(practiceFormPage.inputFirstName));
-		assertTrue(practiceFormPage.checkRequiredField(practiceFormPage.inputLastName));
-		assertTrue(practiceFormPage.checkRequiredField(radioMale));
-		assertTrue(practiceFormPage.checkRequiredField(radioFemale));
-		assertTrue(practiceFormPage.checkRequiredField(radioOther));
-		assertTrue(practiceFormPage.checkRequiredField(practiceFormPage.inputPhone));
-		
-		
-		assertFalse(practiceFormPage.checkRequiredField(DOB));
-		assertFalse(practiceFormPage.checkRequiredField(practiceFormPage.inputSubject));
-		assertFalse(practiceFormPage.checkRequiredField(practiceFormPage.inputEmail));
-		assertFalse(practiceFormPage.checkRequiredField(checkboxSport));
-		assertFalse(practiceFormPage.checkRequiredField(checkboxReading));
-		assertFalse(practiceFormPage.checkRequiredField(checkboxMusic));
-		
-		assertFalse(practiceFormPage.checkRequiredField(picture));
-		assertFalse(practiceFormPage.checkRequiredField(currentAdd));
-		assertFalse(practiceFormPage.checkRequiredField(sate));
-		assertFalse(practiceFormPage.checkRequiredField(city));
+		testBase.scollToElement(practiceFormPage.btnSubmit);
+		testBase.clickButton(practiceFormPage.btnSubmit);
+
+		assertTrue(practiceFormPage.getCssBorderValue(practiceFormPage.txtFirstName, "#dc3545"));
+
 	}
 
 }

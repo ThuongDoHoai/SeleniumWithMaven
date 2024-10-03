@@ -8,8 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import pages.PracticeFormPage;
-
 public class TestBase {
 
 	public WebDriver driver;
@@ -28,8 +26,9 @@ public class TestBase {
 		driver.manage().window().maximize();
 	}
 
-	public void inputText(WebElement locator, String inputData) {
-		locator.sendKeys(inputData);
+	public void inputText(By byLocator, String inputData) {
+		WebElement element = driver.findElement(byLocator);
+		element.sendKeys(inputData);
 	}
 
 	public void inputRadio(String xpath, String selectedOption) {
@@ -48,18 +47,20 @@ public class TestBase {
 		}
 	}
 
-	public void inputMultipleToCombobox(WebElement locator, String inputValue) {
+	public void inputMultipleToCombobox(By byLocator, String inputValue) {
+		WebElement element = driver.findElement(byLocator);
 		String[] listValues = inputValue.split(", ");
 
 		for (int i = 0; i < listValues.length; i++) {
-			locator.sendKeys(listValues[i]);
-			locator.sendKeys(Keys.ENTER);
+			element.sendKeys(listValues[i]);
+			element.sendKeys(Keys.ENTER);
 		}
 	}
 
-	public void inputDropdown(WebElement locator, String inputValue) {
-		locator.sendKeys(inputValue);
-		locator.sendKeys(Keys.ENTER);
+	public void inputDropdown(By byLocator, String inputValue) {
+		WebElement element = driver.findElement(byLocator);
+		element.sendKeys(inputValue);
+		element.sendKeys(Keys.ENTER);
 	}
 
 	public void inputDateByClickDatePicker(String firstClick, String locatorYear, String locatorMonth, String pathDate,
@@ -82,15 +83,26 @@ public class TestBase {
 		elementDate.click();
 	}
 
-	public void uploadFile(WebElement locator, String filePath) {
-		locator.sendKeys(filePath);
+	public void uploadFile(By byLocator, String filePath) {
+		WebElement element = driver.findElement(byLocator);
+		element.sendKeys(filePath);
 	}
 
-	public void clickSubmit(WebElement locator) {
+	public void scollToElement(By byLocator) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].scrollIntoView(true);", locator);
+		WebElement element = driver.findElement(byLocator);
+		js.executeScript("arguments[0].scrollIntoView(true);", element);
+	}
 
-		locator.click();
+	public void clickButton(By locator) throws InterruptedException {
+		WebElement element = driver.findElement(locator);
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].scrollIntoView(true);", element);
+
+		Thread.sleep(500);
+
+		element.click();
 	}
 
 }

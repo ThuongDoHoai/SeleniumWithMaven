@@ -6,55 +6,69 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class CheckBoxPage extends Pages {
+public class CheckBoxPage extends Page {
 
-	public WebElement checkBoxHome = drPage.findElement(By.xpath("//span[@class='rct-checkbox']"));
-	public WebElement arrowHome = drPage.findElement(By.xpath("//button[@title='Toggle']"));
+	public By chbHome = By.xpath("//span[@class='rct-checkbox']//*[name()='svg']");
+	public By arrHome = By.xpath("//button[@title='Toggle']/*[name()='svg']");
+	public By lblResult = By.xpath("//*[@id='result']/span");
+	public By lblListCheckBoxes = By.xpath("//span[@class='rct-title']");
+	public By chbListCheckBoxes = By.xpath("//span[@class='rct-checkbox']/*[name()='svg']");
 
 	public CheckBoxPage(WebDriver driver) {
 		super(driver);
 	}
 
-	public boolean getUnCheckingStatus(WebElement locator) {
-		String attribute = locator.getAttribute("class");
+	public boolean verifyCheckingOfCheckBox(By locator) {
+		WebElement element = testBase.driver.findElement(locator);
 
-		if (attribute.contains("uncheck")) {
+		String attribute = element.getAttribute("class");
+		if (attribute.contains("rct-icon-check")) {
 			return true;
-		} else
-			return false;
+		}
+		return false;
 	}
 
-	public boolean getCheckingStatus(WebElement locator) {
-		String attribute = locator.getAttribute("class");
-
-		if (attribute.contains("check")) {
-			return true;
-		} else
-			return false;
+	public boolean checkCheckingOfCheckBoxes() {
+		List<WebElement> elements = testBase.driver.findElements(chbListCheckBoxes);
+		int i = 0;
+		while (i < elements.size()) {
+			if (elements.get(i).getAttribute("class").contains("rct-icon-check")) {
+				i++;
+			} else
+				return false;
+		}
+		return true;
 	}
 
-	public void clickCheckBoxHome() {
-		checkBoxHome.click();
-	}
+	public String getLableResult(By locator) {
+		List<WebElement> elements = testBase.driver.findElements(locator);
 
-	public void clickArrowHome() {
-		arrowHome.click();
-	}
-
-	public String getTextAfterClick() {
-		String actualText = "";
-		List<WebElement> elements = drPage.findElements(By.xpath("//div[@id='result']/span"));
+		String lblOutput = "";
 
 		for (WebElement e : elements) {
-			actualText = actualText + " " + e.getText();
+			lblOutput = lblOutput + " " + e.getText();
 		}
-		return actualText.trim();
 
+		return lblOutput.trim();
 	}
 
-	public String getlableSubCheckBoxs(WebElement locator) {
-		String lableSubNote = locator.getText();
-		return lableSubNote;
+	public void clickButton(By locator) {
+		WebElement element = testBase.driver.findElement(locator);
+		element.click();
+	}
+
+	public boolean checkLabelCheckBoxes(String[] lblcheckBoxes) {
+		List<WebElement> elements = testBase.driver.findElements(lblListCheckBoxes);
+		int i = 0;
+
+		while (i < elements.size()) {
+			if (elements.get(i).getText().equals(lblcheckBoxes[i])) {
+				i++;
+			} else
+				return false;
+		}
+		return true;
 	}
 
 }
+

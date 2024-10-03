@@ -108,14 +108,9 @@ public class WebTablePage extends Page {
 	}
 
 	public boolean checkLatestRecord(String xpath, String dataNewRecord) {
-		System.out.println("aaaa");
 		List<String> dataInTable = new ArrayList<String>();
 		dataInTable = getDataInTable(xpath);
-		System.out.println("bbbb");
 		int index = dataInTable.size();
-		System.out.println(index);
-		String aaa = dataInTable.get(index);
-		System.out.println(aaa);
 		if (dataInTable.get(index).equals(dataNewRecord))
 			return true;
 		else

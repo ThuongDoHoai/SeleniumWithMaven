@@ -111,7 +111,8 @@ public class WebTablePage extends Page {
 		List<String> dataInTable = new ArrayList<String>();
 		dataInTable = getDataInTable(xpath);
 		int index = dataInTable.size();
-		if (dataInTable.get(index).equals(dataNewRecord))
+		System.out.println(index +"    aaaaaaaaaaa   "+dataInTable.get(index-1));
+		if (dataInTable.get(index-1).trim().equals(dataNewRecord))
 			return true;
 		else
 			return false;

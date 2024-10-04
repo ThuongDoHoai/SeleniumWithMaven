@@ -2,16 +2,16 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-10-04T19:04:58 ICT" name="Default suite" finished-at="2024-10-04T19:05:57 ICT" duration-ms="58864">
+  <suite started-at="2024-10-04T21:07:05 ICT" name="Default suite" finished-at="2024-10-04T21:08:19 ICT" duration-ms="73280">
     <groups>
     </groups>
-    <test started-at="2024-10-04T19:04:58 ICT" name="Default test" finished-at="2024-10-04T19:05:57 ICT" duration-ms="58864">
+    <test started-at="2024-10-04T21:07:05 ICT" name="Default test" finished-at="2024-10-04T21:08:19 ICT" duration-ms="73280">
       <class name="tests.WebTableTest">
-        <test-method is-config="true" signature="openPage()[pri:0, instance:tests.WebTableTest@79924b]" started-at="2024-10-04T19:04:58 ICT" name="openPage" finished-at="2024-10-04T19:05:22 ICT" duration-ms="24080" status="PASS">
+        <test-method is-config="true" signature="openPage()[pri:0, instance:tests.WebTableTest@79924b]" started-at="2024-10-04T21:07:05 ICT" name="openPage" finished-at="2024-10-04T21:07:32 ICT" duration-ms="26625" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openPage -->
-        <test-method signature="registerNewAccountSuccessfully()[pri:0, instance:tests.WebTableTest@79924b]" started-at="2024-10-04T19:05:22 ICT" name="registerNewAccountSuccessfully" finished-at="2024-10-04T19:05:57 ICT" duration-ms="34658" status="PASS">
+        <test-method signature="registerNewAccountSuccessfully()[pri:0, instance:tests.WebTableTest@79924b]" started-at="2024-10-04T21:07:32 ICT" name="registerNewAccountSuccessfully" finished-at="2024-10-04T21:08:19 ICT" duration-ms="46499" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- registerNewAccountSuccessfully -->

@@ -106,15 +106,4 @@ public class WebTablePage extends Page {
 
 		return dataInTable;
 	}
-
-	public boolean checkLatestRecord(String xpath, String dataNewRecord) {
-		List<String> dataInTable = new ArrayList<String>();
-		dataInTable = getDataInTable(xpath);
-		int index = dataInTable.size();
-		System.out.println(index +"    aaaaaaaaaaa   "+dataInTable.get(index-1));
-		if (dataInTable.get(index-1).trim().equals(dataNewRecord))
-			return true;
-		else
-			return false;
-	}
 }

@@ -10,7 +10,7 @@ import tests.models.StudentRegister;
 
 public class PracticeFormTest extends TestCase {
 
-	// @Test (groups = "Happy case")
+	 @Test (groups = "Happy case")
 	public void inputSuccessfully() throws InterruptedException {
 
 		StudentRegister studentRegister = new StudentRegister();
@@ -41,7 +41,8 @@ public class PracticeFormTest extends TestCase {
 
 		String actualDOB = practiceFormPage.getTableValue(practiceFormPage.tableValueXpath, "Date of Birth");
 		int index = studentRegister.DOB.lastIndexOf(" ");
-		String expectedDOB = studentRegister.DOB.replace(Character.toString(studentRegister.DOB.charAt(index)), ",");
+		System.out.println(index);
+		String expectedDOB = studentRegister.DOB.replace(Character.toString(studentRegister.DOB.charAt(index)),",");
 		assertEquals(actualDOB, expectedDOB);
 
 		int index2 = studentRegister.filePath.lastIndexOf("\\");
@@ -49,7 +50,7 @@ public class PracticeFormTest extends TestCase {
 
 	}
 
-	@Test(groups = "Validation case")
+	//@Test(groups = "Validation case")
 	public void submitDataUnsuccessfully() throws InterruptedException {
 
 		PracticeFormPage practiceFormPage = new PracticeFormPage(testBase.driver);

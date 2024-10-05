@@ -21,8 +21,8 @@ public class WebTablePage extends Page {
 
 	public By txtSearchBox = By.id("searchBox");
 
-	public By txtNumberOfRow = By.xpath("//select[@aria-label='rows per page']");
-	public String txtDataInRow = "//*[@class='rt-tbody']/div[@param]//div[@class='rt-td']";
+	public String rowXpath = "//*[@class='rt-tbody']/div[@param]//div[@class='rt-td']";
+	public By firstNameColumn = By.xpath("//*[@class='rt-tbody']//div[@class='rt-td'][1]");
 
 	public By btnAdd = By.id("addNewRecordButton");
 	public By btnSubmit = By.id("submit");
@@ -42,68 +42,81 @@ public class WebTablePage extends Page {
 		testBase.clickButton(btnSubmit);
 	}
 
-	public void setNumberOfRow(By locator) {
-		WebElement element = testBase.driver.findElement(locator);
-		Select selectNumberOfRow = new Select(element);
-		selectNumberOfRow.selectByVisibleText("100 rows");
-	}
-
-	public String getDataInOneRow(By locator) {
-		List<WebElement> elements = testBase.driver.findElements(locator);
-		String result = "";
-		if (elements.get(0).getText().isBlank() || elements.get(0).getText().isEmpty())
-			return "NO DATA";
-		else {
-			for (WebElement e : elements) {
-				result = result + e.getText();
-			}
-			return result.trim();
+	public boolean isCheckValidRow(String xpath) {
+		List<WebElement> elements = testBase.driver.findElements(By.xpath(xpath));
+		for (int i = 0; i < 6; i++) {
+			if (elements.get(i).getText().isBlank() || elements.get(i).getText().isEmpty())
+				return false;
 		}
+
+		return true;
 	}
 
-	public List<String> search(String xpath, String searchKeyWords) {
-		List<String> searchResult = new ArrayList<String>();
-		String newxpath = null;
-		String dataInRow;
-		int i = 1;
+	public List<String> search(By locatorColumn, String locatorRow, String searchWord) {
+		List<WebElement> elements = testBase.driver.findElements(locatorColumn);
+		String newSearchWord = searchWord.toLowerCase();
+		List<String> result = new ArrayList<String>();
 
-		do {
-			newxpath = xpath.replace("@param", String.valueOf(i));
-			By locator = By.xpath(newxpath);
-			dataInRow = getDataInOneRow(locator);
-			if (dataInRow.equals("NO DATA"))
-				break;
-			else {
-				if (dataInRow.contains(searchKeyWords)) {
-					searchResult.add(i - 1, dataInRow);
-					System.out.println(searchResult.get(i - 1));
+		for (int i = 0; i < elements.size(); i++) {
+			if (elements.get(i).getText().toLowerCase().contains(newSearchWord)) {
+				String newLocatorRow = locatorRow.replace("@param", String.valueOf(i + 1));
+
+				if (isCheckValidRow(newLocatorRow) == true) {
+					result.add(elements.get(i).getText());
 				}
 			}
-			i++;
-		} while (true);
-
-		return searchResult;
+		}
+		return result;
 	}
 
-	public List<String> getDataInTable(String xpath) {
-		List<String> dataInTable = new ArrayList<String>();
-		String newxpath = null;
-		String dataInRow;
-		int i = 1;
+	public List<String> getDataInColumnAfterSearch(By locatorColumn) {
+		List<WebElement> elements = testBase.driver.findElements(locatorColumn);
+		List<String> result = new ArrayList<String>();
+		int i = 0;
 
-		do {
-			newxpath = xpath.replace("@param", String.valueOf(i));
-			By locator = By.xpath(newxpath);
-			dataInRow = getDataInOneRow(locator);
-			if (dataInRow.equals("NO DATA"))
-				break;
+		while (i < elements.size()) {
+			if (elements.get(i).getText().isBlank() || elements.get(i).getText().isEmpty())
+				i++;
 			else {
-				dataInTable.add(i - 1, dataInRow);
-				System.out.println(dataInTable.get(i - 1));
+				result.add(elements.get(i).getText());
+				i++;
 			}
-			i++;
-		} while (true);
+		}
+		return result;
+	}
 
-		return dataInTable;
+	public int getNumberOfValidDataInTable(By locatorColumn) {
+		List<WebElement> elements = testBase.driver.findElements(locatorColumn);
+		int count = 0;
+
+		int i = 0;
+
+		while (i < elements.size()) {
+			if (elements.get(i).getText().isBlank() || elements.get(i).getText().isEmpty())
+				i++;
+			else {
+				count++;
+				i++;
+			}
+		}
+
+		return count;
+	}
+
+	public Employee getDataInARow(String rowXpath, int i) {
+		By locator = By.xpath(rowXpath.replace("@param", String.valueOf(i)));
+
+		List<WebElement> elements = testBase.driver.findElements(locator);
+
+		Employee employee = new Employee();
+
+		employee.firstName = elements.get(0).getText();
+		employee.lastName = elements.get(1).getText();
+		employee.age = elements.get(2).getText();
+		employee.email = elements.get(3).getText();
+		employee.salary = elements.get(4).getText();
+		employee.deparment = elements.get(5).getText();
+
+		return employee;
 	}
 }

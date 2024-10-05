@@ -2,19 +2,19 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-10-04T21:07:05 ICT" name="Default suite" finished-at="2024-10-04T21:08:19 ICT" duration-ms="73280">
+  <suite started-at="2024-10-06T03:02:06 ICT" name="Default suite" finished-at="2024-10-06T03:03:18 ICT" duration-ms="71779">
     <groups>
     </groups>
-    <test started-at="2024-10-04T21:07:05 ICT" name="Default test" finished-at="2024-10-04T21:08:19 ICT" duration-ms="73280">
+    <test started-at="2024-10-06T03:02:06 ICT" name="Default test" finished-at="2024-10-06T03:03:18 ICT" duration-ms="71779">
       <class name="tests.WebTableTest">
-        <test-method is-config="true" signature="openPage()[pri:0, instance:tests.WebTableTest@79924b]" started-at="2024-10-04T21:07:05 ICT" name="openPage" finished-at="2024-10-04T21:07:32 ICT" duration-ms="26625" status="PASS">
+        <test-method is-config="true" signature="openPage()[pri:0, instance:tests.WebTableTest@79924b]" started-at="2024-10-06T03:02:06 ICT" name="openPage" finished-at="2024-10-06T03:02:24 ICT" duration-ms="18247" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openPage -->
-        <test-method signature="registerNewAccountSuccessfully()[pri:0, instance:tests.WebTableTest@79924b]" started-at="2024-10-04T21:07:32 ICT" name="registerNewAccountSuccessfully" finished-at="2024-10-04T21:08:19 ICT" duration-ms="46499" status="PASS">
+        <test-method signature="searchByFirstNameSuccessfully()[pri:0, instance:tests.WebTableTest@79924b]" started-at="2024-10-06T03:02:24 ICT" name="searchByFirstNameSuccessfully" finished-at="2024-10-06T03:03:18 ICT" duration-ms="53470" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- registerNewAccountSuccessfully -->
+        </test-method> <!-- searchByFirstNameSuccessfully -->
       </class> <!-- tests.WebTableTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->

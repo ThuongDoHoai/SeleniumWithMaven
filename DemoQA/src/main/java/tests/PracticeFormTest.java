@@ -20,7 +20,7 @@ public class PracticeFormTest extends TestCase {
 		studentRegister.email = "abc@gmail.com";
 		studentRegister.gender = "Other";
 		studentRegister.phone = "0948242456";
-		studentRegister.DOB = "13 January 1989";
+		studentRegister.DOB = "3 January 1989";
 		studentRegister.subject = "Maths, Chemistry";
 		studentRegister.hobbies = "Sports, Reading, Music";
 		studentRegister.filePath = System.getProperty("user.dir") + "\\testdata\\kitty-cat-kitten-pet-45201.jpeg";
@@ -40,9 +40,7 @@ public class PracticeFormTest extends TestCase {
 		assertEquals(actualStudentName, studentRegister.fistName + " " + studentRegister.lastName);
 
 		String actualDOB = practiceFormPage.getTableValue(practiceFormPage.tableValueXpath, "Date of Birth");
-		int index = studentRegister.DOB.lastIndexOf(" ");
-		System.out.println(index);
-		String expectedDOB = studentRegister.DOB.replace(Character.toString(studentRegister.DOB.charAt(index)),",");
+		String expectedDOB = practiceFormPage.convertDOB(studentRegister.DOB);
 		assertEquals(actualDOB, expectedDOB);
 
 		int index2 = studentRegister.filePath.lastIndexOf("\\");

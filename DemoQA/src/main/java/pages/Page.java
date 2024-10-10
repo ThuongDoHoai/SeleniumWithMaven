@@ -11,6 +11,7 @@ public class Page {
 	public TextBoxPage textBoxPage;
 	public CheckBoxPage checkBoxPage;
 	public WebTablePage webTablePage;
+	public RadioButtonPage radioButtonPage;
 
 	public Page(WebDriver driver) {
 		//this.driverPage = driver;
@@ -39,6 +40,12 @@ public class Page {
 		testBase.driver.navigate().to("https://demoqa.com/webtables");
 		webTablePage = new WebTablePage(testBase.driver);
 		return webTablePage;
+	}
+	
+	public RadioButtonPage openRadioButtonPage() {
+		testBase.driver.navigate().to("https://demoqa.com/radio-button");
+		radioButtonPage = new RadioButtonPage(testBase.driver);
+		return radioButtonPage;
 	}
 
 }

@@ -69,7 +69,8 @@ public class PracticeFormPage extends Page {
 
 	public String[] getTextAfterSubmit() {
 
-		List<WebElement> listOutput = testBase.driver.findElements(By.xpath("//div[@class='table-responsive']//tbody//td"));
+		List<WebElement> listOutput = testBase.driver
+				.findElements(By.xpath("//div[@class='table-responsive']//tbody//td"));
 
 		int i = 0;
 
@@ -119,6 +120,19 @@ public class PracticeFormPage extends Page {
 			return true;
 		}
 		return false;
+	}
+
+	public String convertDOB(String dob) {
+		String[] arrayDOB = dob.split(" ");
+		int day = Integer.valueOf(arrayDOB[0]);
+		String newDOB = null;
+
+		if (day < 10) {
+			newDOB = "0" + arrayDOB[0] + " " + arrayDOB[1] + "," + arrayDOB[2];
+		} else
+			newDOB = arrayDOB[0] + " " + arrayDOB[1] + "," + arrayDOB[2];
+
+		return newDOB;
 	}
 
 }

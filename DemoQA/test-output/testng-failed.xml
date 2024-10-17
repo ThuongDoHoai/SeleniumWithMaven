@@ -3,12 +3,12 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="tests.RadioButtonTest">
+      <class name="tests.UploadDownloadTest">
         <methods>
-          <include name="checkDefaultSelection"/>
+          <include name="downloadSuccessfully"/>
           <include name="openPage"/>
         </methods>
-      </class> <!-- tests.RadioButtonTest -->
+      </class> <!-- tests.UploadDownloadTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -7,19 +7,10 @@ import org.openqa.selenium.WebElement;
 
 public class HomePage extends Page {
 
-	public HomePage(WebDriver driverWeb) {
-		super(driverWeb);
+	public HomePage(WebDriver driverWeb, String configFile) {
+		super(driverWeb, configFile);
 	}
 
-	public ElementPage clickElementMenu() {
 
-		WebElement elementMenu = testBase.driver.findElement(By.xpath("//h5[text()='Elements']"));
-
-		JavascriptExecutor js = (JavascriptExecutor) testBase.driver;
-		js.executeScript("arguments[0].scrollIntoView(true);", elementMenu);
-
-		elementMenu.click();
-		return new ElementPage(testBase.driver);
-	}
 
 }

@@ -12,8 +12,8 @@ public class RadioButtonPage extends Page {
 	
 	public By lblSelectedRadio = By.xpath("//span[@class='text-success']");
 
-	public RadioButtonPage(WebDriver driver) {
-		super(driver);
+	public RadioButtonPage(WebDriver driver, String configFile) {
+		super(driver, configFile);
 	}
 
 	public boolean isCheckDefault(By locator1, By locator2, By locator3) {

@@ -40,8 +40,8 @@ public class PracticeFormPage extends Page {
 
 	public String tableValueXpath = "//td[text()='{@param}']//following-sibling::td";
 
-	public PracticeFormPage(WebDriver driver) {
-		super(driver);
+	public PracticeFormPage(WebDriver driver, String configFile) {
+		super(driver, configFile);
 	}
 
 	public void inputData2(StudentRegister studentRegister) {
@@ -49,7 +49,7 @@ public class PracticeFormPage extends Page {
 		testBase.inputText(txtFirstName, studentRegister.fistName);
 		testBase.inputText(txtLastName, studentRegister.lastName);
 		testBase.inputText(txtEmail, studentRegister.email);
-		testBase.inputRadio(rdGenderXpath, studentRegister.gender);
+		inputRadio(rdGenderXpath, studentRegister.gender);
 
 		testBase.inputText(txtMobile, studentRegister.phone);
 		testBase.inputDateByClickDatePicker(txtDobXpath, drYear, drMonth, lblDate, studentRegister.DOB);
@@ -59,12 +59,28 @@ public class PracticeFormPage extends Page {
 		testBase.scollToElement(btnSubmit);
 
 		// continue input data
-		testBase.inputCheckbox(chkHobbiesXpath, studentRegister.hobbies);
+		inputCheckbox(chkHobbiesXpath, studentRegister.hobbies);
 		testBase.uploadFile(txtUpload, studentRegister.filePath);
 		testBase.inputText(txtCurrentAdd, studentRegister.currentAdd);
 		testBase.inputDropdown(txtState, studentRegister.state);
 		testBase.inputDropdown(txtCity, studentRegister.city);
 
+	}
+	
+	public void inputRadio(String xpath, String selectedOption) {
+		String realXpath = xpath.replace("{@param}", selectedOption);
+		WebElement element = testBase.driver.findElement(By.xpath(realXpath));
+		element.click();
+	}
+
+	public void inputCheckbox(String xpath, String selectedOption) {
+		String[] listValue = selectedOption.split(", ");
+
+		for (int i = 0; i < listValue.length; i++) {
+			String realXpath = xpath.replace("{@param}", listValue[i]);
+			WebElement element = testBase.driver.findElement(By.xpath(realXpath));
+			element.click();
+		}
 	}
 
 	public String[] getTextAfterSubmit() {

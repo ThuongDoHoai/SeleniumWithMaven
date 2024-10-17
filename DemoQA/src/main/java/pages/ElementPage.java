@@ -6,14 +6,10 @@ import org.openqa.selenium.WebElement;
 
 public class ElementPage extends Page {
 
-	public ElementPage(WebDriver driverWeb) {
-		super(driverWeb);
+	public ElementPage(WebDriver driverWeb, String configFile) {
+		super(driverWeb, configFile);
 	}
+	
 
-	public TextBoxPage clickTextBox() {
-		WebElement textBoxMenu = testBase.driver.findElement(By.xpath("//span[text()='Text Box']"));
-		textBoxMenu.click();
-		return new TextBoxPage(testBase.driver);
-	}
-
+	
 }

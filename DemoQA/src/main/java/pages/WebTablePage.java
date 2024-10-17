@@ -27,8 +27,8 @@ public class WebTablePage extends Page {
 	public By btnAdd = By.id("addNewRecordButton");
 	public By btnSubmit = By.id("submit");
 
-	public WebTablePage(WebDriver driver) {
-		super(driver);
+	public WebTablePage(WebDriver driver, String configFile) {
+		super(driver, configFile);
 	}
 
 	public void register(Employee employee) throws InterruptedException {

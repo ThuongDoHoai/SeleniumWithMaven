@@ -18,8 +18,8 @@ public class TextBoxPage extends Page {
 	
 	public By btnSubmit = By.id("submit");
 
-	public TextBoxPage(WebDriver driver) {
-		super(driver);
+	public TextBoxPage(WebDriver driver, String configFile) {
+		super(driver, configFile);
 	}
 	
 	

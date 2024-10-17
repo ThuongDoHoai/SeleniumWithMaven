@@ -30,7 +30,7 @@ public class PracticeFormTest extends TestCase {
 		studentRegister.city = "Karnal";
 
 		// start input data
-		PracticeFormPage practiceFormPage = new PracticeFormPage(testBase.driver);
+		PracticeFormPage practiceFormPage = new PracticeFormPage(testBase.driver, CONFIG_FILE);
 		practiceFormPage.openPracticeFormPage();
 		
 		practiceFormPage.inputData2(studentRegister);
@@ -48,14 +48,16 @@ public class PracticeFormTest extends TestCase {
 
 	}
 
-	//@Test(groups = "Validation case")
+//	@Test(groups = "Validation case")
 	public void submitDataUnsuccessfully() throws InterruptedException {
 
-		PracticeFormPage practiceFormPage = new PracticeFormPage(testBase.driver);
+		PracticeFormPage practiceFormPage = new PracticeFormPage(testBase.driver, CONFIG_FILE);
 		practiceFormPage.openPracticeFormPage();
 		
 		testBase.scollToElement(practiceFormPage.btnSubmit);
 		testBase.clickButton(practiceFormPage.btnSubmit);
+		
+		practiceFormPage.testBase.scollToElement(practiceFormPage.txtFirstName);
 
 		assertTrue(practiceFormPage.getCssBorderValue(practiceFormPage.txtFirstName, "#dc3545"));
 

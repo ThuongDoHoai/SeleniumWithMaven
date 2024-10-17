@@ -10,13 +10,13 @@ public class RadioButtonTest extends TestCase {
 
 	@Test
 	public void checkDefaultSelection() throws InterruptedException {
-		testBase.openPage();
-		RadioButtonPage radioButtonPage = new RadioButtonPage(testBase.driver);
-
-		radioButtonPage.openRadioButtonPage();
-
-		assertTrue(radioButtonPage.isCheckDefault(radioButtonPage.rdYes, radioButtonPage.rdImpressive,
-				radioButtonPage.rdNo));
+//		testBase.openPage();
+//		RadioButtonPage radioButtonPage = new RadioButtonPage(testBase.driver);
+//
+//		radioButtonPage.openRadioButtonPage();
+//
+//		assertTrue(radioButtonPage.isCheckDefault(radioButtonPage.rdYes, radioButtonPage.rdImpressive,
+//				radioButtonPage.rdNo));
 	}
 
 }

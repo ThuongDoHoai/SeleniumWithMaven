@@ -14,8 +14,8 @@ public class CheckBoxPage extends Page {
 	public By lblListCheckBoxes = By.xpath("//span[@class='rct-title']");
 	public By chbListCheckBoxes = By.xpath("//span[@class='rct-checkbox']/*[name()='svg']");
 
-	public CheckBoxPage(WebDriver driver) {
-		super(driver);
+	public CheckBoxPage(WebDriver driver, String configFile) {
+		super(driver, configFile);
 	}
 
 	public boolean verifyCheckingOfCheckBox(By locator) {

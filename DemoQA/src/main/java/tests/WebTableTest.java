@@ -3,6 +3,7 @@ package tests;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,11 +13,13 @@ import pages.WebTablePage;
 import tests.models.Employee;
 
 public class WebTableTest extends TestCase {
+	
+	public int timeout;
 
 	// @Test
 	public void registerNewAccountSuccessfully() throws InterruptedException {
 
-		WebTablePage webTablePage = new WebTablePage(testBase.driver);
+		WebTablePage webTablePage = new WebTablePage(testBase.driver, CONFIG_FILE);
 		webTablePage.openWebTablePage();
 
 		Employee employee1 = new Employee();
@@ -51,7 +54,7 @@ public class WebTableTest extends TestCase {
 	@Test
 	public void searchByFirstNameSuccessfully() throws InterruptedException {
 
-		WebTablePage webTablePage = new WebTablePage(testBase.driver);
+		WebTablePage webTablePage = new WebTablePage(testBase.driver, CONFIG_FILE);
 		webTablePage.openWebTablePage();
 
 		Employee employee1 = new Employee();
@@ -87,8 +90,10 @@ public class WebTableTest extends TestCase {
 		webTablePage.register(employee2);
 		testBase.clickButton(webTablePage.btnAdd);
 		webTablePage.register(employee3);
+		
+		timeout= Integer.valueOf(configurations.getConfigValueByKey("short_time"));
 
-		Thread.sleep(5000);
+		testBase.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeout));
 
 		// search to define expect result
 		List<String> expectedSearchResult = webTablePage.search(webTablePage.firstNameColumn, webTablePage.rowXpath,

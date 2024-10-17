@@ -17,7 +17,7 @@ public class TextBoxTest extends TestCase {
 		String currAdd = "HN";
 		String perAdd = "HCM";
 		
-		TextBoxPage textBoxPage = new TextBoxPage(testBase.driver);
+		TextBoxPage textBoxPage = new TextBoxPage(testBase.driver, CONFIG_FILE);
 		textBoxPage.openTextBoxPage();
 		textBoxPage.inputDataAllField(fullName, email, currAdd, perAdd);
 		
@@ -41,7 +41,7 @@ public class TextBoxTest extends TestCase {
 		String currAdd = "HN";
 		String perAdd = "HCM";
 		
-		TextBoxPage textBoxPage = new TextBoxPage(testBase.driver);
+		TextBoxPage textBoxPage = new TextBoxPage(testBase.driver, CONFIG_FILE);
 		textBoxPage.openTextBoxPage();
 		textBoxPage.inputDataAllField(fullName, email, currAdd, perAdd);
 		

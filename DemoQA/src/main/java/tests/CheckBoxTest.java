@@ -13,7 +13,7 @@ public class CheckBoxTest extends TestCase {
 	@Test
 	public void verifyCheckBoxCorrectly() throws InterruptedException {
 		
-		CheckBoxPage checkBoxPage = new CheckBoxPage(testBase.driver);
+		CheckBoxPage checkBoxPage = new CheckBoxPage(testBase.driver, CONFIG_FILE);
 		checkBoxPage.openCheckBoxPage();
 		//check default checking of check box HOME
 		assertFalse(checkBoxPage.verifyCheckingOfCheckBox(checkBoxPage.chbHome));
